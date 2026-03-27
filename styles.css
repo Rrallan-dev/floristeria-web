@@ -1,3 +1,8 @@
+/* Estilos básicos para la web pública */
+:root {
+    --primary: #d63384;
+}
+
 body { font-family: sans-serif; line-height: 1.6; color: #333; max-width: 1000px; margin: auto; padding: 1rem; }
 .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1.5rem; }
 .card { border: 1px solid #ddd; padding: 1rem; border-radius: 8px; text-align: center; }
