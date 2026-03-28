@@ -1,96 +1,380 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <!-- ============================================================
+         META BÁSICO
+         ============================================================ -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Floristería - Catálogo</title>
+
+    <!-- ============================================================
+         SEO — Título y descripción
+         ============================================================
+         El título aparece en la pestaña del browser y en Google.
+         La descripción aparece como subtítulo en los resultados de búsqueda.
+         ============================================================ -->
+    <title>El Bunker de las Flores — Floristería en Misiones</title>
+    <meta name="description" content="Flores frescas, ramos y arreglos florales. Ofertas y novedades actualizadas. El Bunker de las Flores, Misiones.">
+
+    <!-- ============================================================
+         OPEN GRAPH — Preview al compartir en WhatsApp / redes
+         ============================================================
+         Cuando alguien comparte la URL en WhatsApp, estas etiquetas
+         controlan la imagen y el texto que aparecen en la preview.
+         og:type "website" es el valor estándar para sitios de comercio.
+         ============================================================ -->
+    <meta property="og:type"        content="website">
+    <meta property="og:title"       content="El Bunker de las Flores">
+    <meta property="og:description" content="Flores frescas, ramos y arreglos florales en Misiones.">
+    <!-- TODO: reemplazar con una imagen real de la tienda (1200x630px recomendado) -->
+    <meta property="og:image"       content="img/og-cover.jpg">
+
+    <!-- ============================================================
+         ESTILOS
+         ============================================================
+         Se carga antes del contenido para evitar el FOUC
+         (Flash of Unstyled Content — destello de contenido sin formato).
+         ============================================================ -->
     <link rel="stylesheet" href="styles.css">
+
+    <!-- ============================================================
+         BUSCADOR (search.js) — Carga diferida
+         ============================================================
+         defer: el script se descarga en paralelo con el HTML pero
+         se ejecuta DESPUÉS de que todo el HTML fue parseado.
+         Ideal para scripts que no son críticos para el primer render.
+         Si search.js no existe aún, este tag simplemente no hace nada.
+         ============================================================ -->
+    <script src="search.js" defer></script>
 </head>
+
 <body>
-    <header><h1>Nuestra Floristería</h1></header>
+
+    <!-- ============================================================
+         HEADER STICKY
+         ============================================================
+         Se queda visible en la parte superior al hacer scroll.
+         Tiene efecto de vidrio esmerilado (blur) definido en el CSS.
+         ============================================================ -->
+    <header class="site-header">
+        <div class="header-inner">
+
+            <!-- Logo — nombre de la tienda dividido para colorear "Bunker" -->
+            <a href="index.html" class="logo">
+                El <span>Bunker</span> de las Flores
+            </a>
+
+            <!-- Navegación rápida a secciones de la portada.
+                 Solo visible en desktop (el CSS la oculta en mobile).
+                 Los href="#id" hacen scroll suave a esa sección. -->
+            <nav aria-label="Secciones">
+                <ul class="site-nav">
+                    <li><a href="#ofertas">Ofertas</a></li>
+                    <li><a href="#novedades">Novedades</a></li>
+                    <li><a href="#catalogo">Catálogo</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+
+        </div>
+    </header>
+
+
+    <!-- ============================================================
+         HERO — Bienvenida
+         ============================================================ -->
+    <section class="hero" aria-label="Bienvenida">
+        <div class="hero-inner">
+            <span class="hero-badge">🌿 Flores frescas en Misiones</span>
+            <h1>El <em>Bunker</em><br>de las Flores</h1>
+            <p>Ramos, arreglos y plantas para cada momento. Hacé tu pedido por WhatsApp y lo preparamos para vos.</p>
+        </div>
+    </section>
+
+
     <main>
-        <section id="ofertas"><h2>Ofertas</h2><div class="grid">
-    <div class="card">
-        <a href="productos/001.html">
+
+        <!-- ============================================================
+             SECCIÓN OFERTAS
+             ============================================================
+             Solo aparece si hay productos con esOferta: true.
+             Si no hay ninguno, build.js inyecta un mensaje vacío
+             gracias al bloque de fallback que tiene definido.
+
+             
+    <div class="card" data-nombre="Rosas Rojas" data-tags="romÃ¡ntico regalos">
+        <a href="productos/001.html" class="card-img-wrap">
             <img src="img/rosa-roja.jpg" alt="Rosas Rojas" loading="lazy">
+            <div class="card-badges"><span class="card-badge oferta">Oferta</span></div>
         </a>
-        <h3>Rosas Rojas</h3>
-        <p class="precio">$1500</p>
-        <a class="btn-ver" href="productos/001.html">Ver más</a>
+        <div class="card-info">
+            <h3>Rosas Rojas</h3>
+            <div class="precio">$1500</div>
+            <p class="card-desc">Ramo de 12 rosas rojas frescas.</p>
+            <a class="btn-ver" href="productos/001.html">Ver más</a>
+        </div>
     </div>
-    <div class="card">
-        <a href="productos/002.html">
+    <div class="card" data-nombre="Rosas Amarillas" data-tags="romÃ¡ntico regalos">
+        <a href="productos/002.html" class="card-img-wrap">
             <img src="img/rosa-amarilla.jpg" alt="Rosas Amarillas" loading="lazy">
+            <div class="card-badges"><span class="card-badge oferta">Oferta</span></div>
         </a>
-        <h3>Rosas Amarillas</h3>
-        <p class="precio">$1500</p>
-        <a class="btn-ver" href="productos/002.html">Ver más</a>
+        <div class="card-info">
+            <h3>Rosas Amarillas</h3>
+            <div class="precio">$1500</div>
+            <p class="card-desc">Ramo de 12 rosas amarillas frescas.</p>
+            <a class="btn-ver" href="productos/002.html">Ver más</a>
+        </div>
     </div>
-    <div class="card">
-        <a href="productos/1774622244189.html">
+    <div class="card" data-nombre="Esta es otro producto " data-tags="">
+        <a href="productos/1774622244189.html" class="card-img-wrap">
             <img src="img/1774622242670.jpg" alt="Esta es otro producto " loading="lazy">
+            <div class="card-badges"><span class="card-badge oferta">Oferta</span></div>
         </a>
-        <h3>Esta es otro producto </h3>
-        <p class="precio">$515</p>
-        <a class="btn-ver" href="productos/1774622244189.html">Ver más</a>
+        <div class="card-info">
+            <h3>Esta es otro producto </h3>
+            <div class="precio">$515</div>
+            <p class="card-desc">Sin emojis</p>
+            <a class="btn-ver" href="productos/1774622244189.html">Ver más</a>
+        </div>
     </div>
-    <div class="card">
-        <a href="productos/1774626745708.html">
+    <div class="card" data-nombre="Nuevo producto " data-tags="">
+        <a href="productos/1774626745708.html" class="card-img-wrap">
             <img src="img/1774626743750.jpg" alt="Nuevo producto " loading="lazy">
+            <div class="card-badges"><span class="card-badge oferta">Oferta</span></div>
         </a>
-        <h3>Nuevo producto </h3>
-        <p class="precio">$500000</p>
-        <a class="btn-ver" href="productos/1774626745708.html">Ver más</a>
-    </div></div></section>
-        <section id="catalogo"><h2>Todos los Productos</h2><div class="grid">
-    <div class="card">
-        <a href="productos/001.html">
-            <img src="img/rosa-roja.jpg" alt="Rosas Rojas" loading="lazy">
-        </a>
-        <h3>Rosas Rojas</h3>
-        <p class="precio">$1500</p>
-        <a class="btn-ver" href="productos/001.html">Ver más</a>
-    </div>
-    <div class="card">
-        <a href="productos/002.html">
-            <img src="img/rosa-amarilla.jpg" alt="Rosas Amarillas" loading="lazy">
-        </a>
-        <h3>Rosas Amarillas</h3>
-        <p class="precio">$1500</p>
-        <a class="btn-ver" href="productos/002.html">Ver más</a>
-    </div>
-    <div class="card">
-        <a href="productos/1774621974825.html">
+        <div class="card-info">
+            <h3>Nuevo producto </h3>
+            <div class="precio">$500000</div>
+            <p class="card-desc">Hshsijzhz</p>
+            <a class="btn-ver" href="productos/1774626745708.html">Ver más</a>
+        </div>
+    </div> es el marcador que build.js reemplaza con
+             el HTML generado de las tarjetas de producto.
+             ============================================================ -->
+        <section id="ofertas" aria-labelledby="titulo-ofertas">
+            <div class="contenedor">
+
+                <div class="seccion-titulo">
+                    <span class="badge-seccion badge-oferta">🏷️ Ofertas</span>
+                    <h2 id="titulo-ofertas">Precios especiales</h2>
+                </div>
+
+                <div class="grid">
+                    {{OFERTAS}}
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             SECCIÓN NOVEDADES
+             ============================================================
+             Productos con esNuevo: true.
+             ============================================================ -->
+        <section id="novedades" aria-labelledby="titulo-novedades">
+            <div class="contenedor">
+
+                <div class="seccion-titulo">
+                    <span class="badge-seccion badge-nuevo">✨ Nuevo</span>
+                    <h2 id="titulo-novedades">Recién llegados</h2>
+                </div>
+
+                <div class="grid">
+                    
+    <div class="card" data-nombre="Hola" data-tags="">
+        <a href="productos/1774621974825.html" class="card-img-wrap">
             <img src="img/1774621972183.jpg" alt="Hola" loading="lazy">
+            <div class="card-badges"><span class="card-badge nuevo">Nuevo</span></div>
         </a>
-        <h3>Hola</h3>
-        <p class="precio">$100</p>
-        <a class="btn-ver" href="productos/1774621974825.html">Ver más</a>
+        <div class="card-info">
+            <h3>Hola</h3>
+            <div class="precio">$100</div>
+            <p class="card-desc">Esta es una descripcion </p>
+            <a class="btn-ver" href="productos/1774621974825.html">Ver más</a>
+        </div>
     </div>
-    <div class="card">
-        <a href="productos/1774622244189.html">
-            <img src="img/1774622242670.jpg" alt="Esta es otro producto " loading="lazy">
-        </a>
-        <h3>Esta es otro producto </h3>
-        <p class="precio">$515</p>
-        <a class="btn-ver" href="productos/1774622244189.html">Ver más</a>
-    </div>
-    <div class="card">
-        <a href="productos/1774626745708.html">
-            <img src="img/1774626743750.jpg" alt="Nuevo producto " loading="lazy">
-        </a>
-        <h3>Nuevo producto </h3>
-        <p class="precio">$500000</p>
-        <a class="btn-ver" href="productos/1774626745708.html">Ver más</a>
-    </div>
-    <div class="card">
-        <a href="productos/1774722148534.html">
+    <div class="card" data-nombre="Gsienhdjd" data-tags="">
+        <a href="productos/1774722148534.html" class="card-img-wrap">
             <img src="img/1774722145877.jpg" alt="Gsienhdjd" loading="lazy">
+            <div class="card-badges"><span class="card-badge nuevo">Nuevo</span></div>
         </a>
-        <h3>Gsienhdjd</h3>
-        <p class="precio">$300</p>
-        <a class="btn-ver" href="productos/1774722148534.html">Ver más</a>
-    </div></div></section>
+        <div class="card-info">
+            <h3>Gsienhdjd</h3>
+            <div class="precio">$300</div>
+            <p class="card-desc">Hsiwjajaj</p>
+            <a class="btn-ver" href="productos/1774722148534.html">Ver más</a>
+        </div>
+    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ============================================================
+             SECCIÓN CATÁLOGO COMPLETO
+             ============================================================
+             Todos los productos, sin filtro.
+             ============================================================ -->
+        <section id="catalogo" aria-labelledby="titulo-catalogo">
+            <div class="contenedor">
+
+                <div class="seccion-titulo">
+                    <h2 id="titulo-catalogo">Catálogo completo</h2>
+                </div>
+
+                <!-- ── Buscador ──
+                     Solo aparece si search.js está presente y se cargó.
+                     search.js busca este input por ID y escucha el evento
+                     "input" para filtrar las tarjetas en tiempo real.
+                     Si search.js no existe, el input se ve pero no hace nada. -->
+                <div class="buscador-wrap">
+                    <input
+                        type="search"
+                        id="buscador"
+                        placeholder="Buscar flores, ramos..."
+                        aria-label="Buscar productos"
+                    >
+                </div>
+
+                <div class="grid" id="grid-catalogo">
+                    
+    <div class="card" data-nombre="Rosas Rojas" data-tags="romÃ¡ntico regalos">
+        <a href="productos/001.html" class="card-img-wrap">
+            <img src="img/rosa-roja.jpg" alt="Rosas Rojas" loading="lazy">
+            <div class="card-badges"><span class="card-badge oferta">Oferta</span></div>
+        </a>
+        <div class="card-info">
+            <h3>Rosas Rojas</h3>
+            <div class="precio">$1500</div>
+            <p class="card-desc">Ramo de 12 rosas rojas frescas.</p>
+            <a class="btn-ver" href="productos/001.html">Ver más</a>
+        </div>
+    </div>
+    <div class="card" data-nombre="Rosas Amarillas" data-tags="romÃ¡ntico regalos">
+        <a href="productos/002.html" class="card-img-wrap">
+            <img src="img/rosa-amarilla.jpg" alt="Rosas Amarillas" loading="lazy">
+            <div class="card-badges"><span class="card-badge oferta">Oferta</span></div>
+        </a>
+        <div class="card-info">
+            <h3>Rosas Amarillas</h3>
+            <div class="precio">$1500</div>
+            <p class="card-desc">Ramo de 12 rosas amarillas frescas.</p>
+            <a class="btn-ver" href="productos/002.html">Ver más</a>
+        </div>
+    </div>
+    <div class="card" data-nombre="Hola" data-tags="">
+        <a href="productos/1774621974825.html" class="card-img-wrap">
+            <img src="img/1774621972183.jpg" alt="Hola" loading="lazy">
+            <div class="card-badges"><span class="card-badge nuevo">Nuevo</span></div>
+        </a>
+        <div class="card-info">
+            <h3>Hola</h3>
+            <div class="precio">$100</div>
+            <p class="card-desc">Esta es una descripcion </p>
+            <a class="btn-ver" href="productos/1774621974825.html">Ver más</a>
+        </div>
+    </div>
+    <div class="card" data-nombre="Esta es otro producto " data-tags="">
+        <a href="productos/1774622244189.html" class="card-img-wrap">
+            <img src="img/1774622242670.jpg" alt="Esta es otro producto " loading="lazy">
+            <div class="card-badges"><span class="card-badge oferta">Oferta</span></div>
+        </a>
+        <div class="card-info">
+            <h3>Esta es otro producto </h3>
+            <div class="precio">$515</div>
+            <p class="card-desc">Sin emojis</p>
+            <a class="btn-ver" href="productos/1774622244189.html">Ver más</a>
+        </div>
+    </div>
+    <div class="card" data-nombre="Nuevo producto " data-tags="">
+        <a href="productos/1774626745708.html" class="card-img-wrap">
+            <img src="img/1774626743750.jpg" alt="Nuevo producto " loading="lazy">
+            <div class="card-badges"><span class="card-badge oferta">Oferta</span></div>
+        </a>
+        <div class="card-info">
+            <h3>Nuevo producto </h3>
+            <div class="precio">$500000</div>
+            <p class="card-desc">Hshsijzhz</p>
+            <a class="btn-ver" href="productos/1774626745708.html">Ver más</a>
+        </div>
+    </div>
+    <div class="card" data-nombre="Gsienhdjd" data-tags="">
+        <a href="productos/1774722148534.html" class="card-img-wrap">
+            <img src="img/1774722145877.jpg" alt="Gsienhdjd" loading="lazy">
+            <div class="card-badges"><span class="card-badge nuevo">Nuevo</span></div>
+        </a>
+        <div class="card-info">
+            <h3>Gsienhdjd</h3>
+            <div class="precio">$300</div>
+            <p class="card-desc">Hsiwjajaj</p>
+            <a class="btn-ver" href="productos/1774722148534.html">Ver más</a>
+        </div>
+    </div>
+                </div>
+
+            </div>
+        </section>
+
     </main>
+
+
+    <!-- ============================================================
+         FOOTER
+         ============================================================
+         Información de contacto y datos de la tienda.
+         TODO: reemplazar el número de WhatsApp con el real.
+         ============================================================ -->
+    <footer class="site-footer" id="contacto">
+        <div class="footer-inner">
+
+            <div class="footer-brand">
+                <div class="logo">El <span>Bunker</span> de las Flores</div>
+                <p>
+                    Flores frescas y arreglos para cada ocasión.<br>
+                    Misiones, Argentina.
+                </p>
+            </div>
+
+            <div class="footer-contacto">
+                <h4>¿Querés hacer un pedido?</h4>
+                <p style="margin-bottom: 1rem; font-size: 0.875rem;">
+                    Escribinos por WhatsApp y te respondemos a la brevedad.
+                </p>
+
+                <!-- ── Botón de WhatsApp ──
+                     El link wa.me/549XXXXXXXXXX abre WhatsApp con el número
+                     precargado. El texto después del ? es el mensaje inicial.
+                     TODO: reemplazar 549XXXXXXXXXX con el número real
+                     (código de país 54, código de área sin 0, número sin 15) -->
+                <a
+                    href="https://wa.me/549XXXXXXXXXX?text=Hola!%20Vi%20su%20cat%C3%A1logo%20y%20quiero%20consultar%20por%20un%20producto."
+                    class="btn-whatsapp"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Contactar por WhatsApp"
+                >
+                    <!-- SVG del logo de WhatsApp — inline para no depender de ningún archivo externo -->
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                    </svg>
+                    Escribir por WhatsApp
+                </a>
+            </div>
+
+        </div>
+
+        <p class="footer-copy">
+            © <span id="anio-actual"></span> El Bunker de las Flores — Todos los derechos reservados.
+        </p>
+    </footer>
+
+    <!-- Año dinámico en el copyright — evita tener que actualizar el HTML cada año -->
+    <script>
+        document.getElementById('anio-actual').textContent = new Date().getFullYear();
+    </script>
+
 </body>
 </html>
