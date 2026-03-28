@@ -1,2 +1,3 @@
 User-agent: *
 Allow: /
+Sitemap: https://rrallan-dev.github.io/floristeria-web/sitemap.xml
