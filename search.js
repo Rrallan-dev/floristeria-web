@@ -33,11 +33,11 @@
 // Si en el futuro se migra a módulos, reemplazar este bloque
 // con: import { TAGS_DISPONIBLES } from './tags.js';
 const TAGS_DISPONIBLES = [
-    { value: 'romántico',          label: 'Romántico',          emoji: '💕' },
-    { value: 'regalo',             label: 'Regalo',             emoji: '🎁' },
-    { value: 'ramo',               label: 'Ramo',               emoji: '💐' },
-    { value: 'planta de interior', label: 'Planta de interior', emoji: '🪴' },
-    { value: 'planta de exterior', label: 'Planta de exterior', emoji: '🌿' },
+    { value: 'romántico',          label: 'Romántico',          emoji: '' },
+    { value: 'regalo',             label: 'Regalo',             emoji: '' },
+    { value: 'ramo',               label: 'Ramo',               emoji: '' },
+    { value: 'planta de interior', label: 'Planta de interior', emoji: '' },
+    { value: 'planta de exterior', label: 'Planta de exterior', emoji: '' },
 ];
 
 
