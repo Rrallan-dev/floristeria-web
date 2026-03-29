@@ -207,7 +207,71 @@
             <div class="producto-detalle">
 
                 <div class="producto-img-wrap">
-                    <img src="../img/rosa-amarilla.jpg" alt="Rosas Amarillas" class="producto-img-principal">
+                    
+        <div class="carousel" role="region" aria-label="Fotos del producto">
+            <div class="carousel-track">
+                
+        <div class="carousel-slide active" data-index="0">
+            <img src="../img/rosa-amarilla.jpg" alt="Rosas Amarillas — foto 1" loading="eager">
+        </div>
+    
+        <div class="carousel-slide" data-index="1">
+            <img src="../img/1774806920043_ln28q.jpg" alt="Rosas Amarillas — foto 2" loading="lazy">
+        </div>
+    
+            </div>
+            <button class="carousel-btn carousel-prev" aria-label="Foto anterior">‹</button>
+            <button class="carousel-btn carousel-next" aria-label="Foto siguiente">›</button>
+            <div class="carousel-thumbs">
+                
+        <button
+            class="carousel-thumb active"
+            data-index="0"
+            aria-label="Ver foto 1"
+        >
+            <img src="../img/rosa-amarilla.jpg" alt="Miniatura 1" loading="lazy">
+        </button>
+    
+        <button
+            class="carousel-thumb"
+            data-index="1"
+            aria-label="Ver foto 2"
+        >
+            <img src="../img/1774806920043_ln28q.jpg" alt="Miniatura 2" loading="lazy">
+        </button>
+    
+            </div>
+        </div>
+        <script>
+        (function() {
+            const track  = document.querySelector('.carousel-track');
+            const slides = document.querySelectorAll('.carousel-slide');
+            const thumbs = document.querySelectorAll('.carousel-thumb');
+            const prev   = document.querySelector('.carousel-prev');
+            const next   = document.querySelector('.carousel-next');
+            let current  = 0;
+
+            function goTo(index) {
+                slides[current].classList.remove('active');
+                thumbs[current].classList.remove('active');
+                current = (index + slides.length) % slides.length;
+                slides[current].classList.add('active');
+                thumbs[current].classList.add('active');
+            }
+
+            prev.addEventListener('click', () => goTo(current - 1));
+            next.addEventListener('click', () => goTo(current + 1));
+            thumbs.forEach((t, i) => t.addEventListener('click', () => goTo(i)));
+
+            let startX = 0;
+            track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+            track.addEventListener('touchend', e => {
+                const diff = startX - e.changedTouches[0].clientX;
+                if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
+            }, { passive: true });
+        })();
+        </script>
+    
                 </div>
 
                 <div class="producto-info">
@@ -215,14 +279,14 @@
                     <!-- ── Badges de estado + tags de categoría ──────────
                          Todos en el mismo contenedor .producto-badges.
                          build.js genera:
-                           <span class="card-badge oferta">Oferta</span>   → chips rellenos (Oferta / Nuevo)
-                           <span class="producto-tag">regalos</span> → chips de borde (tags de categoría)
+                           <span class="card-badge nuevo">Nuevo</span>   → chips rellenos (Oferta / Nuevo)
+                           <span class="producto-tag">💕 romántico</span><span class="producto-tag">💐 ramo</span><span class="producto-tag">regalos</span> → chips de borde (tags de categoría)
                          Si un producto no tiene badges ni tags, el div
                          queda vacío pero no ocupa espacio (flex + gap).
                          ─────────────────────────────────────────────────── -->
                     <div class="producto-badges">
-                        <span class="card-badge oferta">Oferta</span>
-                        <span class="producto-tag">regalos</span>
+                        <span class="card-badge nuevo">Nuevo</span>
+                        <span class="producto-tag">💕 romántico</span><span class="producto-tag">💐 ramo</span><span class="producto-tag">regalos</span>
                     </div>
 
                     <h1 class="producto-nombre">Rosas Amarillas</h1>
