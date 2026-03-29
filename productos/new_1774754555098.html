@@ -1,50 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <!-- ============================================================
-         META BÁSICO
-         ============================================================ -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- ============================================================
-         SEO — Título dinámico por producto
-         ============================================================
-         Raml es reemplazado por build.js con el nombre real.
-         Tener el nombre del producto en el título mejora el SEO
-         porque Google lo muestra en los resultados de búsqueda.
-         ============================================================ -->
     <title>Raml — El Bunker de las Flores</title>
     <meta name="description" content="{{DESCRIPCION}}">
 
-    <!-- ============================================================
-         OPEN GRAPH — Preview al compartir este producto por WhatsApp
-         ============================================================
-         Cuando alguien comparte la URL de este producto, WhatsApp
-         muestra una preview con la foto, el nombre y la descripción.
-         https://rrallan-dev.github.io/floristeria-web/img/1774754554764_0.jpg contiene la URL absoluta de la imagen, necesaria
-         porque WhatsApp no puede resolver URLs relativas.
-         ============================================================ -->
     <meta property="og:type"        content="product">
     <meta property="og:title"       content="Raml — El Bunker de las Flores">
     <meta property="og:description" content="{{DESCRIPCION}}">
     <meta property="og:image"       content="https://rrallan-dev.github.io/floristeria-web/img/1774754554764_0.jpg">
 
-    <!-- ============================================================
-         ESTILOS
-         ============================================================
-         Se usa ../styles.css porque este archivo vive en /productos/
-         y el CSS está un nivel arriba, en la raíz del sitio.
-         ============================================================ -->
     <link rel="stylesheet" href="../styles.css">
 
-    <!-- ============================================================
-         ESTILOS ESPECÍFICOS DE ESTA PÁGINA
-         ============================================================
-         El layout de detalle de producto es suficientemente distinto
-         de la portada como para tener sus propios estilos inline.
-         Son pocos y solo aplican a esta plantilla.
-         ============================================================ -->
     <style>
         /* ── Layout de detalle ── */
         .producto-wrap {
@@ -53,7 +22,6 @@
             padding: 2rem 1.25rem 4rem;
         }
 
-        /* Breadcrumb (migas de pan) — ruta de navegación */
         .breadcrumb {
             font-size: 0.85rem;
             color: var(--texto-suave);
@@ -63,16 +31,9 @@
             gap: 0.4rem;
         }
 
-        .breadcrumb a {
-            color: var(--verde);
-            transition: color var(--transicion);
-        }
+        .breadcrumb a { color: var(--verde); transition: color var(--transicion); }
+        .breadcrumb a:hover { color: var(--rosa); }
 
-        .breadcrumb a:hover {
-            color: var(--rosa);
-        }
-
-        /* Grilla del detalle: imagen izquierda, info derecha */
         .producto-detalle {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -80,7 +41,6 @@
             align-items: start;
         }
 
-        /* ── Imagen principal ── */
         .producto-img-wrap {
             border-radius: var(--radio);
             overflow: hidden;
@@ -89,13 +49,8 @@
             box-shadow: var(--sombra-card);
         }
 
-        .producto-img-wrap img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .producto-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* Placeholder cuando no hay imagen */
         .producto-img-placeholder {
             width: 100%;
             height: 100%;
@@ -106,17 +61,48 @@
             background: var(--crema);
         }
 
-        /* ── Info del producto ── */
         .producto-info {
             display: flex;
             flex-direction: column;
             gap: 1rem;
         }
 
+        /* ── Zona de badges y tags ──────────────────────────────
+           Los badges (Oferta/Nuevo) y los tags de categoría
+           se muestran juntos en una fila flexible con wrap.
+           Los badges son píldoras rellenas (como en el catálogo).
+           Los tags son píldoras de borde, visualmente más livianos
+           para diferenciarse de los badges de estado.
+           ─────────────────────────────────────────────────────── */
         .producto-badges {
             display: flex;
             gap: 0.5rem;
             flex-wrap: wrap;
+            align-items: center;
+        }
+
+        /* Tags de categoría — chip de borde */
+        .producto-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            padding: 0.2rem 0.65rem;
+            border-radius: 999px;
+            border: 1.5px solid var(--borde);
+            color: var(--texto-suave);
+            background: var(--blanco);
+            letter-spacing: 0.02em;
+            transition: border-color var(--transicion), color var(--transicion);
+        }
+
+        /* Leve énfasis al hacer hover (desktop) */
+        @media (hover: hover) {
+            .producto-tag:hover {
+                border-color: var(--verde);
+                color: var(--verde);
+            }
         }
 
         .producto-nombre {
@@ -140,11 +126,7 @@
             color: var(--texto-suave);
         }
 
-        /* Separador decorativo */
-        .divider {
-            height: 1px;
-            background: var(--borde);
-        }
+        .divider { height: 1px; background: var(--borde); }
 
         .producto-desc {
             font-size: 1rem;
@@ -152,7 +134,6 @@
             line-height: 1.7;
         }
 
-        /* Botón de WhatsApp — versión grande para la página de producto */
         .btn-whatsapp-producto {
             display: inline-flex;
             align-items: center;
@@ -177,20 +158,17 @@
             box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
         }
 
-        /* Aclaración debajo del botón */
         .producto-nota {
             font-size: 0.8rem;
             color: var(--texto-suave);
             text-align: center;
         }
 
-        /* ── Responsive mobile ── */
         @media (max-width: 640px) {
             .producto-detalle {
-                grid-template-columns: 1fr; /* Una columna en mobile */
+                grid-template-columns: 1fr;
                 gap: 1.5rem;
             }
-
             .producto-wrap {
                 padding: 1.5rem 1rem 3rem;
             }
@@ -200,7 +178,6 @@
 
 <body>
 
-    <!-- Header idéntico al de la portada para consistencia visual -->
     <header class="site-header">
         <div class="header-inner">
             <a href="../index.html" class="logo">
@@ -221,9 +198,6 @@
     <main>
         <div class="producto-wrap">
 
-            <!-- ── Breadcrumb ──
-                 Muestra la ruta: Inicio > Nombre del producto
-                 Ayuda al usuario a saber dónde está y volver fácil. -->
             <nav class="breadcrumb" aria-label="Ruta de navegación">
                 <a href="../index.html">Inicio</a>
                 <span aria-hidden="true">›</span>
@@ -232,37 +206,33 @@
 
             <div class="producto-detalle">
 
-                <!-- ── Imagen principal ──
-                     build.js inyecta la src correcta según si la imagen
-                     existe o si usa el placeholder SVG inline. -->
                 <div class="producto-img-wrap">
                     <img src="../img/1774754554764_0.jpg" alt="Raml" class="producto-img-principal">
                 </div>
 
-                <!-- ── Información del producto ── -->
                 <div class="producto-info">
 
-                    <!-- Badges de oferta / novedad (si aplica) -->
+                    <!-- ── Badges de estado + tags de categoría ──────────
+                         Todos en el mismo contenedor .producto-badges.
+                         build.js genera:
+                              → chips rellenos (Oferta / Nuevo)
+                            → chips de borde (tags de categoría)
+                         Si un producto no tiene badges ni tags, el div
+                         queda vacío pero no ocupa espacio (flex + gap).
+                         ─────────────────────────────────────────────────── -->
                     <div class="producto-badges">
+                        
                         
                     </div>
 
-                    <!-- Nombre del producto -->
                     <h1 class="producto-nombre">Raml</h1>
 
-                    <!-- Precio -->
                     <div class="producto-precio producto-precio consultar">Consultar precio</div>
 
                     <div class="divider"></div>
 
-                    <!-- Descripción (puede estar vacía) -->
                     
 
-                    <!-- ── Botón de consulta por WhatsApp ──
-                         El mensaje está pre-armado con el nombre del producto.
-                         encodeURIComponent garantiza que caracteres especiales
-                         (tildes, espacios, etc.) no rompan la URL.
-                         build.js genera este link con el nombre real del producto. -->
                     <a
                         href="https://wa.me/549XXXXXXXXXX?text=Hola!%20Vi%20su%20cat%C3%A1logo%20y%20quiero%20consultar%20por%3A%20Raml"
                         class="btn-whatsapp-producto"
@@ -287,7 +257,6 @@
     </main>
 
 
-    <!-- Footer simplificado — consistente con la portada -->
     <footer class="site-footer">
         <div class="footer-inner">
             <div class="footer-brand">
@@ -299,7 +268,6 @@
                 <p style="margin-bottom: 1rem; font-size: 0.875rem;">
                     Escribinos y coordinamos la entrega.
                 </p>
-                <!-- TODO: reemplazar número con el real -->
                 <a
                     href="https://wa.me/549XXXXXXXXXX"
                     class="btn-whatsapp"
