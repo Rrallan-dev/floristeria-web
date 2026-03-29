@@ -415,7 +415,7 @@ section { padding: 4rem 0; }
     max-width: var(--max-ancho);
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 2rem;
     align-items: start;
 }
@@ -430,9 +430,48 @@ section { padding: 4rem 0; }
     font-size: 0.875rem;
     color: rgba(255,255,255,0.5);
     line-height: 1.5;
+    margin-bottom: 1rem;
 }
 
-.footer-contacto h4 {
+/* Redes sociales */
+.footer-redes {
+    display: flex;
+    gap: 0.6rem;
+    margin-top: 0.5rem;
+}
+
+.red-social {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.7);
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+    flex-shrink: 0;
+}
+
+.red-social:hover {
+    transform: translateY(-2px);
+    color: white;
+}
+
+.red-social--instagram:hover {
+    background: radial-gradient(circle at 30% 107%,
+        #fdf497 0%, #fdf497 5%,
+        #fd5949 45%, #d6249f 60%,
+        #285AEB 90%);
+}
+
+.red-social--facebook:hover {
+    background: #1877f2;
+}
+
+/* Contacto */
+.footer-contacto h4,
+.footer-mapa h4 {
     font-family: var(--fuente-titulo);
     color: white;
     font-size: 1rem;
@@ -449,12 +488,19 @@ section { padding: 4rem 0; }
     border-radius: 999px;
     font-size: 0.9rem;
     font-weight: 500;
-    transition: background var(--transicion), transform var(--transicion);
+    transition: background 0.2s, transform 0.2s;
 }
 
 .btn-whatsapp:hover {
     background: #1da851;
     transform: translateY(-2px);
+}
+
+/* Mapa */
+.mapa-wrap {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3);
 }
 
 .footer-copy {
@@ -465,6 +511,14 @@ section { padding: 4rem 0; }
     font-size: 0.8rem;
     color: rgba(255,255,255,0.35);
     text-align: center;
+}
+
+/* ── Responsive footer ── */
+@media (max-width: 767px) {
+    .footer-inner {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
 }
 
 
