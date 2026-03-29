@@ -165,7 +165,7 @@ function pasaFiltroCategoria(card) {
 
     // Verificar filtros de tag
     // data-tags contiene los tags separados por espacio (sin normalizar)
-    const tagsProducto = (card.dataset.tags || '').split(' ').filter(Boolean);
+    const tagsProducto = (card.dataset.tags || '').split('|').filter(Boolean);
     for (const tagActivo of filtrosActivos) {
         if (tagActivo === 'oferta' || tagActivo === 'nuevo') continue;
         if (tagsProducto.some(t => normalizar(t) === normalizar(tagActivo))) return true;
