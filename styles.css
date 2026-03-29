@@ -3,69 +3,58 @@
    El Bunker de las Flores
    ============================================================
    Estructura de este archivo:
-     1. Variables y reset
-     2. Tipografía
-     3. Layout base
-     4. Header y navegación
-     5. Hero
-     6. Secciones (ofertas, novedades, catálogo)
-     7. Tarjetas de producto
-     8. Estado vacío
-     9. Footer
-    10. Animaciones de entrada
-    11. Responsive (mobile-first)
+     1.  Variables y reset
+     2.  Tipografía
+     3.  Layout base
+     4.  Header y navegación
+     5.  Hero
+     6.  Secciones (ofertas, novedades, catálogo)
+     7.  Tarjetas de producto
+     8.  Indicador de múltiples fotos en tarjeta
+     9.  Estado vacío
+    10.  Footer
+    11.  Carrusel de imágenes (página de detalle)
+    12.  Animaciones de entrada
+    13.  Responsive (mobile-first)
    ============================================================ */
 
 
 /* ════════════════════════════════════════════════════════════
    1. VARIABLES Y RESET
-   ════════════════════════════════════════════════════════════
-   Las variables CSS (--nombre) centralizan los valores que
-   se repiten en todo el archivo. Si la dueña quiere cambiar
-   el color principal en el futuro, solo se cambia acá.
    ════════════════════════════════════════════════════════════ */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500&display=swap');
 
 :root {
-    /* Paleta principal */
-    --blanco:       #fdfcfa;          /* Fondo general — blanco cálido, no frío */
-    --crema:        #f5f0eb;          /* Fondo alternativo para secciones */
-    --verde:        #4a7c59;          /* Verde botánico profundo */
-    --verde-suave:  #e8f0ea;          /* Verde muy claro para fondos de badges */
-    --rosa:         #d4687a;          /* Rosa principal — más sobrio que el anterior */
-    --rosa-suave:   #fce8ec;          /* Rosa muy claro para fondos */
-    --texto:        #2c2c2c;          /* Casi negro — más suave que #000 */
-    --texto-suave:  #6b6b6b;          /* Gris para textos secundarios */
-    --borde:        #e8e2db;          /* Borde sutil entre elementos */
+    --blanco:       #fdfcfa;
+    --crema:        #f5f0eb;
+    --verde:        #4a7c59;
+    --verde-suave:  #e8f0ea;
+    --rosa:         #d4687a;
+    --rosa-suave:   #fce8ec;
+    --texto:        #2c2c2c;
+    --texto-suave:  #6b6b6b;
+    --borde:        #e8e2db;
 
-    /* Tipografía */
-    --fuente-titulo: 'Playfair Display', Georgia, serif;  /* Display — títulos con carácter */
-    --fuente-cuerpo: 'DM Sans', sans-serif;               /* Sans-serif limpio para todo lo demás */
+    --fuente-titulo: 'Playfair Display', Georgia, serif;
+    --fuente-cuerpo: 'DM Sans', sans-serif;
 
-    /* Espaciados */
     --gap:        1.5rem;
-    --radio:      12px;               /* Border-radius consistente en toda la app */
-    --max-ancho:  1100px;             /* Ancho máximo del contenido */
+    --radio:      12px;
+    --max-ancho:  1100px;
 
-    /* Sombras */
-    --sombra-card: 0 2px 12px rgba(0,0,0,0.07);
+    --sombra-card:  0 2px 12px rgba(0,0,0,0.07);
     --sombra-hover: 0 8px 28px rgba(0,0,0,0.13);
 
-    /* Transiciones */
     --transicion: 0.25s ease;
 }
 
-/* Reset mínimo — elimina inconsistencias entre browsers */
 *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
 
-/* Scroll suave al navegar entre secciones */
-html {
-    scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
 body {
     font-family: var(--fuente-cuerpo);
@@ -73,19 +62,11 @@ body {
     color: var(--texto);
     line-height: 1.65;
     font-size: 16px;
-    /* Evita que textos muy largos rompan el layout en mobile */
     overflow-x: hidden;
 }
 
-img {
-    display: block;
-    max-width: 100%;
-}
-
-a {
-    color: inherit;
-    text-decoration: none;
-}
+img { display: block; max-width: 100%; }
+a   { color: inherit; text-decoration: none; }
 
 
 /* ════════════════════════════════════════════════════════════
@@ -97,29 +78,13 @@ h1, h2, h3 {
     color: var(--texto);
 }
 
-h2 {
-    font-size: clamp(1.5rem, 4vw, 2rem);
-    /* clamp(mínimo, preferido, máximo) — escala el tamaño
-       suavemente según el ancho de pantalla, sin media queries */
-}
-
-h3 {
-    font-size: 1.05rem;
-    font-weight: 600;
-}
-
-p {
-    color: var(--texto-suave);
-}
+h2 { font-size: clamp(1.5rem, 4vw, 2rem); }
+h3 { font-size: 1.05rem; font-weight: 600; }
+p  { color: var(--texto-suave); }
 
 
 /* ════════════════════════════════════════════════════════════
    3. LAYOUT BASE
-   ════════════════════════════════════════════════════════════
-   .contenedor limita el ancho del contenido y lo centra.
-   Se aplica dentro de cada sección para que el fondo de la
-   sección pueda ir de borde a borde mientras el contenido
-   queda centrado.
    ════════════════════════════════════════════════════════════ */
 .contenedor {
     max-width: var(--max-ancho);
@@ -127,11 +92,8 @@ p {
     padding: 0 1.25rem;
 }
 
-section {
-    padding: 4rem 0;
-}
+section { padding: 4rem 0; }
 
-/* Separador visual entre secciones */
 .seccion-titulo {
     display: flex;
     align-items: center;
@@ -139,11 +101,8 @@ section {
     margin-bottom: 2rem;
 }
 
-.seccion-titulo h2 {
-    white-space: nowrap;
-}
+.seccion-titulo h2 { white-space: nowrap; }
 
-/* Línea decorativa que se extiende desde el título */
 .seccion-titulo::after {
     content: '';
     flex: 1;
@@ -156,13 +115,10 @@ section {
    4. HEADER Y NAVEGACIÓN
    ════════════════════════════════════════════════════════════ */
 .site-header {
-    position: sticky;        /* Se queda arriba al hacer scroll */
+    position: sticky;
     top: 0;
     z-index: 100;
     background: rgba(253, 252, 250, 0.92);
-    /* backdrop-filter: desenfoca lo que hay detrás del header,
-       efecto "vidrio esmerilado". Solo funciona en browsers modernos,
-       en los demás simplemente se ve el fondo sólido. */
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--borde);
@@ -185,11 +141,8 @@ section {
     letter-spacing: -0.02em;
 }
 
-.logo span {
-    color: var(--rosa);
-}
+.logo span { color: var(--rosa); }
 
-/* Navegación de secciones */
 .site-nav {
     display: flex;
     gap: 1.5rem;
@@ -200,7 +153,6 @@ section {
     font-size: 0.875rem;
     font-weight: 500;
     color: var(--texto-suave);
-    transition: color var(--transicion);
     padding: 0.25rem 0;
     border-bottom: 2px solid transparent;
     transition: color var(--transicion), border-color var(--transicion);
@@ -214,13 +166,9 @@ section {
 
 /* ════════════════════════════════════════════════════════════
    5. HERO
-   ════════════════════════════════════════════════════════════
-   Franja superior de bienvenida. Usa un fondo degradado suave
-   con un patrón de puntos para dar textura sin usar imágenes.
    ════════════════════════════════════════════════════════════ */
 .hero {
     background-color: var(--crema);
-    /* Patrón de puntos decorativos superpuesto al fondo crema */
     background-image: radial-gradient(circle, #c8dcc8 1px, transparent 1px);
     background-size: 28px 28px;
     padding: 5rem 1.25rem;
@@ -239,7 +187,7 @@ section {
     font-size: 0.78rem;
     font-weight: 500;
     padding: 0.3rem 0.9rem;
-    border-radius: 999px;      /* Pastilla perfecta */
+    border-radius: 999px;
     margin-bottom: 1.25rem;
     letter-spacing: 0.05em;
     text-transform: uppercase;
@@ -268,13 +216,8 @@ section {
 /* ════════════════════════════════════════════════════════════
    6. SECCIONES
    ════════════════════════════════════════════════════════════ */
+#ofertas { background: var(--rosa-suave); }
 
-/* Sección Ofertas — fondo rosa muy suave para destacarla */
-#ofertas {
-    background: var(--rosa-suave);
-}
-
-/* Badge decorativo junto al título de cada sección */
 .badge-seccion {
     display: inline-flex;
     align-items: center;
@@ -287,23 +230,12 @@ section {
     text-transform: uppercase;
 }
 
-.badge-oferta {
-    background: #fde8cc;
-    color: #9a5a00;
-}
-
-.badge-nuevo {
-    background: var(--verde-suave);
-    color: var(--verde);
-}
+.badge-oferta { background: #fde8cc; color: #9a5a00; }
+.badge-nuevo  { background: var(--verde-suave); color: var(--verde); }
 
 
 /* ════════════════════════════════════════════════════════════
    7. TARJETAS DE PRODUCTO
-   ════════════════════════════════════════════════════════════
-   La grilla usa auto-fit + minmax para adaptarse sola a
-   cualquier cantidad de productos y cualquier ancho de pantalla,
-   sin necesidad de media queries específicas.
    ════════════════════════════════════════════════════════════ */
 .grid {
     display: grid;
@@ -311,18 +243,16 @@ section {
     gap: var(--gap);
 }
 
-/* ── Tarjeta ── */
 .card {
     background: white;
     border-radius: var(--radio);
-    overflow: hidden;          /* La imagen no se sale del borde redondeado */
+    overflow: hidden;
     box-shadow: var(--sombra-card);
     transition: transform var(--transicion), box-shadow var(--transicion);
     display: flex;
-    flex-direction: column;    /* Imagen arriba, info abajo */
+    flex-direction: column;
 }
 
-/* Elevación suave al pasar el mouse — solo en desktop */
 @media (hover: hover) {
     .card:hover {
         transform: translateY(-4px);
@@ -330,12 +260,9 @@ section {
     }
 }
 
-/* ── Imagen de la tarjeta ── */
 .card-img-wrap {
     position: relative;
     width: 100%;
-    /* aspect-ratio reserva el espacio de la imagen antes de que cargue,
-       evitando el "salto de layout" (CLS — Cumulative Layout Shift) */
     aspect-ratio: 1 / 1;
     background: var(--crema);
     overflow: hidden;
@@ -344,17 +271,16 @@ section {
 .card-img-wrap img {
     width: 100%;
     height: 100%;
-    object-fit: cover;         /* Recorta para llenar sin deformar */
+    object-fit: cover;
     transition: transform 0.4s ease;
 }
 
 @media (hover: hover) {
     .card:hover .card-img-wrap img {
-        transform: scale(1.04); /* Zoom sutil al hacer hover */
+        transform: scale(1.04);
     }
 }
 
-/* Placeholder cuando no hay imagen */
 .card-img-placeholder {
     width: 100%;
     height: 100%;
@@ -365,7 +291,6 @@ section {
     background: var(--crema);
 }
 
-/* ── Badges sobre la imagen ── */
 .card-badges {
     position: absolute;
     top: 0.6rem;
@@ -386,19 +311,15 @@ section {
 .card-badge.oferta { background: #ff6b6b; color: white; }
 .card-badge.nuevo  { background: var(--verde); color: white; }
 
-/* ── Info de la tarjeta ── */
 .card-info {
     padding: 1rem;
-    flex: 1;                   /* Empuja el botón al fondo de la tarjeta */
+    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 0.4rem;
 }
 
-.card-info h3 {
-    font-size: 1rem;
-    color: var(--texto);
-}
+.card-info h3 { font-size: 1rem; color: var(--texto); }
 
 .precio {
     font-weight: 600;
@@ -414,22 +335,19 @@ section {
     font-weight: 400;
 }
 
-/* Descripción corta en la tarjeta (si existe) */
 .card-desc {
     font-size: 0.82rem;
     color: var(--texto-suave);
     line-height: 1.4;
-    /* Limitar a 2 líneas con ellipsis — evita tarjetas de altura desigual */
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
 }
 
-/* ── Botón "Ver más" ── */
 .btn-ver {
     display: block;
-    margin-top: auto;          /* Siempre al fondo de la tarjeta */
+    margin-top: auto;
     padding: 0.6rem 1rem;
     background: var(--verde);
     color: white;
@@ -447,12 +365,33 @@ section {
 
 
 /* ════════════════════════════════════════════════════════════
-   8. ESTADO VACÍO
+   8. INDICADOR DE MÚLTIPLES FOTOS EN TARJETA
    ════════════════════════════════════════════════════════════
-   Mensaje cuando una sección no tiene productos.
+   Píldora con ícono 📷 y número que aparece en la esquina
+   inferior derecha de la imagen de la tarjeta.
+   Solo se genera cuando el producto tiene más de una foto.
+   ════════════════════════════════════════════════════════════ */
+.card-multi-img {
+    position: absolute;
+    bottom: 0.5rem;
+    right: 0.5rem;
+    background: rgba(0, 0, 0, 0.5);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.2rem 0.5rem;
+    border-radius: 999px;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    pointer-events: none; /* No interfiere con el click en la tarjeta */
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   9. ESTADO VACÍO
    ════════════════════════════════════════════════════════════ */
 .empty-section {
-    grid-column: 1 / -1;       /* Ocupa todas las columnas de la grilla */
+    grid-column: 1 / -1;
     text-align: center;
     padding: 3rem 1rem;
     color: var(--texto-suave);
@@ -464,7 +403,7 @@ section {
 
 
 /* ════════════════════════════════════════════════════════════
-   9. FOOTER
+   10. FOOTER
    ════════════════════════════════════════════════════════════ */
 .site-footer {
     background: var(--texto);
@@ -500,7 +439,6 @@ section {
     margin-bottom: 0.75rem;
 }
 
-/* Botón de WhatsApp */
 .btn-whatsapp {
     display: inline-flex;
     align-items: center;
@@ -531,103 +469,253 @@ section {
 
 
 /* ════════════════════════════════════════════════════════════
-   10. ANIMACIONES DE ENTRADA
+   11. CARRUSEL DE IMÁGENES — PÁGINA DE DETALLE DE PRODUCTO
    ════════════════════════════════════════════════════════════
-   Las tarjetas aparecen con un fade + slide suave al cargar.
-   animation-fill-mode: both → el elemento empieza invisible
-   (no hay destello antes de que empiece la animación).
+   El carrusel generado por build.js tiene esta estructura HTML:
+
+     .carousel
+       .carousel-track
+         .carousel-slide.active   ← visible
+         .carousel-slide
+         ...
+       .carousel-btn.carousel-prev
+       .carousel-btn.carousel-next
+       .carousel-thumbs
+         .carousel-thumb.active
+         .carousel-thumb
+         ...
+
+   Solo el slide con .active es visible. El JS inline en cada
+   página de producto maneja la lógica de navegación.
+
+   Si el producto tiene una sola imagen, build.js genera solo
+   un <img> directo, sin .carousel. Estos estilos no interfieren.
+   ════════════════════════════════════════════════════════════ */
+
+/* Imagen simple (producto con una sola foto) */
+.producto-img-principal {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radio);
+}
+
+/* ── Contenedor principal del carrusel ── */
+.carousel {
+    position: relative;
+    width: 100%;
+    border-radius: var(--radio);
+    overflow: hidden;
+    background: var(--crema);
+    /* Reservar espacio para las miniaturas debajo */
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* ── Track: contiene todos los slides apilados ── */
+.carousel-track {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Cuadrado — consistente con las tarjetas */
+    overflow: hidden;
+    border-radius: var(--radio);
+}
+
+/* ── Slides individuales ── */
+.carousel-slide {
+    position: absolute;
+    inset: 0;              /* top/right/bottom/left: 0 — cubre todo el track */
+    opacity: 0;
+    transition: opacity 0.35s ease;
+    pointer-events: none;  /* El slide inactivo no bloquea clicks */
+}
+
+.carousel-slide.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Placeholder cuando no hay imagen */
+.carousel-slide .producto-img-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 5rem;
+    background: var(--crema);
+}
+
+/* ── Flechas de navegación ── */
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    /* Ajustar para que no queden sobre las miniaturas */
+    margin-top: calc(-1 * (80px + 8px) / 2); /* mitad de (altura thumbs + gap) */
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.88);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--texto);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    transition: background var(--transicion), transform var(--transicion);
+    z-index: 2;
+    /* Separar del borde del track */
+    line-height: 1;
+}
+
+.carousel-btn:hover {
+    background: white;
+    transform: translateY(-50%) scale(1.08);
+    margin-top: calc(-1 * (80px + 8px) / 2); /* mantener el offset */
+}
+
+.carousel-prev { left: 10px; }
+.carousel-next { right: 10px; }
+
+/* Ocultar flechas cuando solo hay una foto (sin carrusel) */
+.carousel-track:only-child ~ .carousel-btn {
+    display: none;
+}
+
+/* ── Miniaturas ── */
+.carousel-thumbs {
+    display: flex;
+    flex-direction: row;
+    gap: 6px;
+    padding: 0 2px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.carousel-thumbs::-webkit-scrollbar { display: none; }
+
+.carousel-thumb {
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 2px solid transparent;
+    background: var(--crema);
+    padding: 0;
+    cursor: pointer;
+    transition: border-color var(--transicion), opacity var(--transicion);
+    opacity: 0.6;
+}
+
+.carousel-thumb.active {
+    border-color: var(--verde);
+    opacity: 1;
+}
+
+.carousel-thumb:hover {
+    opacity: 0.85;
+}
+
+.carousel-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Placeholder de miniatura cuando no hay imagen */
+.thumb-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    background: var(--crema);
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   12. ANIMACIONES DE ENTRADA
    ════════════════════════════════════════════════════════════ */
 @keyframes fadeUp {
-    from {
-        opacity: 0;
-        transform: translateY(16px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
 }
 
 .card {
     animation: fadeUp 0.4s ease both;
 }
 
-/* Retrasar la animación de cada tarjeta según su posición en la grilla.
-   Crea un efecto de "cascada" donde las tarjetas aparecen una por una. */
-.card:nth-child(1)  { animation-delay: 0.05s; }
-.card:nth-child(2)  { animation-delay: 0.10s; }
-.card:nth-child(3)  { animation-delay: 0.15s; }
-.card:nth-child(4)  { animation-delay: 0.20s; }
-.card:nth-child(5)  { animation-delay: 0.25s; }
-.card:nth-child(6)  { animation-delay: 0.30s; }
-.card:nth-child(7)  { animation-delay: 0.35s; }
-.card:nth-child(8)  { animation-delay: 0.40s; }
+.card:nth-child(1) { animation-delay: 0.05s; }
+.card:nth-child(2) { animation-delay: 0.10s; }
+.card:nth-child(3) { animation-delay: 0.15s; }
+.card:nth-child(4) { animation-delay: 0.20s; }
+.card:nth-child(5) { animation-delay: 0.25s; }
+.card:nth-child(6) { animation-delay: 0.30s; }
+.card:nth-child(7) { animation-delay: 0.35s; }
+.card:nth-child(8) { animation-delay: 0.40s; }
 
-/* Respetar preferencia del usuario de reducir animaciones
-   (accesibilidad — personas con epilepsia o sensibilidad al movimiento) */
 @media (prefers-reduced-motion: reduce) {
-    .card {
-        animation: none;
-    }
-    html {
-        scroll-behavior: auto;
-    }
+    .card { animation: none; }
+    html  { scroll-behavior: auto; }
 }
 
 
 /* ════════════════════════════════════════════════════════════
-   11. RESPONSIVE — Mobile first
-   ════════════════════════════════════════════════════════════
-   Los estilos base están pensados para mobile (pantallas chicas).
-   Los @media ajustan el layout para pantallas más grandes.
+   13. RESPONSIVE — Mobile first
    ════════════════════════════════════════════════════════════ */
-
-/* Tablet y desktop (768px en adelante) */
 @media (min-width: 768px) {
 
-    /* La nav se muestra en desktop */
-    .site-nav {
-        display: flex;
-    }
+    .site-nav { display: flex; }
 
-    /* Hero más generoso en desktop */
-    .hero {
-        padding: 7rem 1.25rem;
-    }
+    .hero { padding: 7rem 1.25rem; }
 
-    /* Footer en dos columnas en desktop */
-    .footer-inner {
-        grid-template-columns: 1fr 1fr;
+    .footer-inner { grid-template-columns: 1fr 1fr; }
+
+    /* Miniaturas del carrusel más grandes en desktop */
+    .carousel-thumb {
+        width: 68px;
+        height: 68px;
     }
 }
 
-/* Mobile — ocultar nav de escritorio */
 @media (max-width: 767px) {
 
-    .site-nav {
-        display: none; /* En mobile, la navegación son los títulos de sección */
-    }
+    .site-nav { display: none; }
 
-    section {
-        padding: 2.5rem 0;
-    }
+    section { padding: 2.5rem 0; }
 
-    .hero {
-        padding: 3rem 1.25rem;
-    }
+    .hero { padding: 3rem 1.25rem; }
 
-    /* Footer en una columna en mobile */
-    .footer-inner {
-        grid-template-columns: 1fr;
-    }
+    .footer-inner { grid-template-columns: 1fr; }
 
-    /* Grilla de 2 columnas fijas en mobile para aprovechar el espacio */
     .grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 0.75rem;
     }
 
-    .card-info {
-        padding: 0.75rem;
+    .card-info { padding: 0.75rem; }
+
+    /* En mobile, las flechas del carrusel son más pequeñas */
+    .carousel-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 1rem;
     }
 }
