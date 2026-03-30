@@ -200,6 +200,94 @@ function aplicarFiltros() {
     actualizarBadgeFiltros();
 }
 
+// ════════════════════════════════════════════════════════════
+// SCROLL HORIZONTAL — Flechas de navegación (desktop)
+//                     + Hint de deslizamiento (mobile)
+// ════════════════════════════════════════════════════════════
+
+/**
+ * Para cada sección con scroll horizontal:
+ *   - Desktop: inyecta botones prev/next y actualiza su estado
+ *   - Mobile:  inyecta un toast "deslizá" que desaparece solo
+ *              (solo la primera vez, usando sessionStorage)
+ */
+function inicializarScrollSecciones() {
+    const wraps = document.querySelectorAll('.scroll-horizontal-wrap');
+
+    wraps.forEach((wrap, idx) => {
+        const track = wrap.querySelector('.scroll-horizontal');
+        if (!track) return;
+
+        // ── Flechas (desktop) ────────────────────────────────
+        const btnPrev = document.createElement('button');
+        const btnNext = document.createElement('button');
+
+        btnPrev.className  = 'scroll-nav-btn scroll-nav-btn--prev';
+        btnNext.className  = 'scroll-nav-btn scroll-nav-btn--next';
+        btnPrev.innerHTML  = '‹';
+        btnNext.innerHTML  = '›';
+        btnPrev.setAttribute('aria-label', 'Ver anteriores');
+        btnNext.setAttribute('aria-label', 'Ver siguientes');
+
+        wrap.appendChild(btnPrev);
+        wrap.appendChild(btnNext);
+
+        // Cuánto desplazar: ancho de una tarjeta + gap
+        function getScrollAmount() {
+            const card = track.querySelector('.card');
+            if (!card) return 240;
+            const style = getComputedStyle(track);
+            const gap   = parseFloat(style.gap) || 24;
+            return card.offsetWidth + gap;
+        }
+
+        btnPrev.addEventListener('click', () => {
+            track.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+        });
+
+        btnNext.addEventListener('click', () => {
+            track.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+        });
+
+        // Actualizar estado disabled de los botones
+        function actualizarBotones() {
+            const max = track.scrollWidth - track.clientWidth;
+            btnPrev.disabled = track.scrollLeft <= 2;
+            btnNext.disabled = track.scrollLeft >= max - 2;
+        }
+
+        track.addEventListener('scroll', actualizarBotones, { passive: true });
+        // Llamar una vez al cargar para el estado inicial
+        actualizarBotones();
+        // Volver a verificar cuando las imágenes carguen y cambien el tamaño
+        window.addEventListener('load', actualizarBotones);
+
+        // ── Hint de deslizamiento (mobile, solo 1 vez por sesión) ──
+        const hintKey = `scrollHintMostrado_${idx}`;
+        const yaVisto = sessionStorage.getItem(hintKey);
+
+        // Detectar si el contenido realmente requiere scroll
+        // (puede que haya pocos productos y no haya overflow)
+        const necesitaScroll = track.scrollWidth > track.clientWidth + 10;
+
+        if (!yaVisto && necesitaScroll) {
+            const hint = document.createElement('span');
+            hint.className   = 'scroll-hint';
+            hint.textContent = 'Deslizá para ver más';
+            wrap.appendChild(hint);
+
+            sessionStorage.setItem(hintKey, '1');
+
+            // Remover el elemento del DOM al terminar la animación
+            hint.addEventListener('animationend', () => hint.remove());
+        }
+    });
+}
+
+// Esperar a que el DOM esté listo
+// (search.js ya se carga con defer, así que el DOM está disponible)
+inicializarScrollSecciones();
+
 /**
  * Muestra u oculta el mensaje "sin resultados".
  */

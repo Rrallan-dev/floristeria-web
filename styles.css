@@ -740,10 +740,10 @@ section { padding: 4rem 0; }
    que hay más contenido sin necesitar ningún texto extra.
    ════════════════════════════════════════════════════════════ */
 .scroll-horizontal-wrap {
-    /* Romper el contenedor para que llegue al borde de la pantalla */
     margin-left: -1.25rem;
     margin-right: -1.25rem;
     overflow: hidden;
+    position: relative;
 }
 
 .scroll-horizontal {
@@ -781,6 +781,148 @@ section { padding: 4rem 0; }
 }
 
 /* ════════════════════════════════════════════════════════════
+   HERO — Botones sociales
+   ════════════════════════════════════════════════════════════ */
+.hero-social {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1.75rem;
+}
+
+.hero-social-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    flex-shrink: 0;
+}
+
+.hero-social-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 18px rgba(0,0,0,0.22);
+}
+
+.hero-social-btn--whatsapp  { background: #25D366; }
+.hero-social-btn--instagram {
+    background: radial-gradient(circle at 30% 107%,
+        #fdf497 0%, #fdf497 5%,
+        #fd5949 45%, #d6249f 60%,
+        #285AEB 90%);
+}
+.hero-social-btn--facebook  { background: #1877f2; }
+.hero-social-btn--maps      { background: #EA4335; }
+
+
+/* ════════════════════════════════════════════════════════════
+   SCROLL HORIZONTAL — Wrapper con flechas (desktop)
+   ════════════════════════════════════════════════════════════ */
+
+/* Flechas prev/next — solo visibles en desktop (hover device) */
+.scroll-nav-btn {
+    display: none; /* oculto por defecto */
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: white;
+    border: 1.5px solid var(--borde);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.13);
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--texto);
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: background 0.2s, box-shadow 0.2s, transform 0.2s;
+    /* Compensar el margin negativo del scroll-horizontal-wrap */
+    margin-top: 0;
+}
+
+.scroll-nav-btn--prev { left: 4px; }
+.scroll-nav-btn--next { right: 4px; }
+
+.scroll-nav-btn:hover {
+    background: var(--verde-suave);
+    border-color: var(--verde);
+    color: var(--verde);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.18);
+    transform: translateY(-50%) scale(1.08);
+}
+
+/* Deshabilitado cuando no hay más scroll en esa dirección */
+.scroll-nav-btn:disabled {
+    opacity: 0.3;
+    cursor: default;
+    transform: translateY(-50%);
+    background: white;
+    border-color: var(--borde);
+    color: var(--texto);
+    box-shadow: none;
+}
+
+@media (hover: hover) and (min-width: 768px) {
+    .scroll-nav-btn { display: flex; }
+}
+
+
+/* ════════════════════════════════════════════════════════════
+   SCROLL HINT — Toast "deslizá para ver más"
+   ════════════════════════════════════════════════════════════ */
+.scroll-hint {
+    position: absolute;
+    right: 1.25rem;
+    bottom: 1.5rem;
+    background: rgba(30, 30, 30, 0.78);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 0.4rem 0.85rem 0.4rem 0.65rem;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    pointer-events: none;
+    white-space: nowrap;
+    /* Animación: aparece, espera, desaparece */
+    animation: hintLifecycle 2.8s ease forwards;
+    z-index: 5;
+}
+
+.scroll-hint::before {
+    content: '👆';
+    font-size: 0.9rem;
+    animation: hintFingerSlide 0.9s ease-in-out infinite alternate;
+    display: inline-block;
+}
+
+@keyframes hintFingerSlide {
+    from { transform: translateX(0); }
+    to   { transform: translateX(5px); }
+}
+
+@keyframes hintLifecycle {
+    0%   { opacity: 0; transform: translateY(6px); }
+    12%  { opacity: 1; transform: translateY(0); }
+    72%  { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0; transform: translateY(4px); }
+}
+
+/* El hint solo tiene sentido en touch (mobile) */
+@media (hover: hover) {
+    .scroll-hint { display: none; }
+}
+
+/* ════════════════════════════════════════════════════════════
    13. RESPONSIVE — Mobile first
    ════════════════════════════════════════════════════════════ */
 @media (min-width: 768px) {
@@ -800,7 +942,21 @@ section { padding: 4rem 0; }
 
 @media (max-width: 767px) {
 
-    .site-nav { display: none; }
+    .site-nav {
+        display: flex;
+        gap: 0;
+        overflow-x: auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+    }
+
+    .site-nav::-webkit-scrollbar { display: none; }
+
+    .site-nav a {
+        white-space: nowrap;
+        padding: 0.25rem 0.75rem;
+        font-size: 0.8rem;
+    }
 
     section { padding: 2.5rem 0; }
 
