@@ -803,9 +803,45 @@ inputBuscador.addEventListener('keydown', (e) => {
 });
 
 
+
 // ════════════════════════════════════════════════════════════
 // INICIALIZACIÓN
 // ════════════════════════════════════════════════════════════
 inyectarEstilos();
 crearModalFiltros();
 aplicarFiltros();
+
+// ── Menú hamburguesa (mobile) ────────────────────────────────
+(function() {
+    const btnMenu = document.getElementById('btn-menu');
+    const nav     = document.getElementById('site-nav');
+    if (!btnMenu || !nav) return;
+
+    function abrirMenu() {
+        nav.classList.add('abierto');
+        btnMenu.classList.add('abierto');
+        btnMenu.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function cerrarMenu() {
+        nav.classList.remove('abierto');
+        btnMenu.classList.remove('abierto');
+        btnMenu.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+    }
+
+    btnMenu.addEventListener('click', () => {
+        nav.classList.contains('abierto') ? cerrarMenu() : abrirMenu();
+    });
+
+    // Al hacer click en cualquier link del nav, cerrar el menú
+    nav.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', cerrarMenu);
+    });
+
+    // Escape cierra el menú
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') cerrarMenu();
+    });
+})();
