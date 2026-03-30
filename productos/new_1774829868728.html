@@ -329,6 +329,8 @@
     </style>
 </head>
 
+<script src="../menu.js" defer></script>      <!-- en template-producto.html -->
+
 <body>
 
     <header class="site-header">
@@ -670,64 +672,6 @@
             const diff = touchStartX - e.changedTouches[0].clientX;
             if (Math.abs(diff) > 50) mostrar(diff > 0 ? current + 1 : current - 1);
         }, { passive: true });
-    })();
-    </script>
-    <script>
-    (function() {
-        const btnMenu = document.getElementById('btn-menu');
-        if (!btnMenu) return;
-
-        const overlay = document.createElement('div');
-        overlay.className = 'menu-overlay';
-        overlay.id = 'menu-overlay';
-        overlay.setAttribute('role', 'dialog');
-        overlay.setAttribute('aria-modal', 'true');
-
-        const btnCerrar = document.createElement('button');
-        btnCerrar.className = 'menu-overlay-cerrar';
-        btnCerrar.innerHTML = '✕';
-        btnCerrar.setAttribute('aria-label', 'Cerrar menú');
-        overlay.appendChild(btnCerrar);
-
-        // Links — mismos que el nav del template-producto
-        [
-            { href: '../index.html#ofertas',   text: 'Ofertas'   },
-            { href: '../index.html#novedades', text: 'Novedades' },
-            { href: '../index.html#catalogo',  text: 'Catálogo'  },
-            { href: '../index.html#contacto',  text: 'Contacto'  },
-        ].forEach(({ href, text }) => {
-            const a = document.createElement('a');
-            a.href = href;
-            a.textContent = text;
-            overlay.appendChild(a);
-        });
-
-        document.body.appendChild(overlay);
-
-        function abrirMenu() {
-            overlay.classList.add('abierto');
-            btnMenu.classList.add('abierto');
-            btnMenu.setAttribute('aria-expanded', 'true');
-            document.body.style.overflow = 'hidden';
-            btnCerrar.focus();
-        }
-
-        function cerrarMenu() {
-            overlay.classList.remove('abierto');
-            btnMenu.classList.remove('abierto');
-            btnMenu.setAttribute('aria-expanded', 'false');
-            document.body.style.overflow = '';
-        }
-
-        btnMenu.addEventListener('click', () => {
-            overlay.classList.contains('abierto') ? cerrarMenu() : abrirMenu();
-        });
-
-        btnCerrar.addEventListener('click', cerrarMenu);
-        overlay.querySelectorAll('a').forEach(a => a.addEventListener('click', cerrarMenu));
-        document.addEventListener('keydown', e => {
-            if (e.key === 'Escape' && overlay.classList.contains('abierto')) cerrarMenu();
-        });
     })();
     </script>
 </body>

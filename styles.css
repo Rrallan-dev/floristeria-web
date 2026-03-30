@@ -131,6 +131,15 @@ section { padding: 4rem 0; }
     padding: 1rem 1.25rem;
     max-width: var(--max-ancho);
     margin: 0 auto;
+    gap: 1rem;
+}
+
+/* El nav ocupa el espacio del medio — en mobile está oculto
+   así que el btn-menu queda solo a la derecha del logo */
+.header-inner nav {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
 }
 
 .logo {
@@ -941,14 +950,9 @@ section { padding: 4rem 0; }
 }
 
 @media (max-width: 767px) {
-
-    /* El nav en mobile NO es el menú — es solo el contenedor lógico.
-       El menú real es el overlay que se crea via JS fuera del header. */
-    .site-nav {
-        display: none !important;
-    }
-
-    /* Botón hamburguesa */
+ 
+    .site-nav { display: none !important; }
+ 
     .btn-menu {
         display: flex;
         flex-direction: column;
@@ -962,12 +966,14 @@ section { padding: 4rem 0; }
         padding: 4px;
         border-radius: 6px;
         transition: background 0.2s;
-        position: relative;
-        z-index: 1001;
+        /* Asegurar que quede a la derecha — el flex del header-inner
+           lo ubica al final naturalmente con justify-content: space-between */
+        margin-left: auto;
+        flex-shrink: 0;
     }
-
+ 
     .btn-menu:hover { background: var(--crema); }
-
+ 
     .btn-menu span {
         display: block;
         width: 22px;
@@ -977,14 +983,11 @@ section { padding: 4rem 0; }
         transition: transform 0.28s ease, opacity 0.28s ease;
         transform-origin: center;
     }
-
+ 
     .btn-menu.abierto span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
     .btn-menu.abierto span:nth-child(2) { opacity: 0; transform: scaleX(0); }
     .btn-menu.abierto span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-
-    /* El btn-menu también necesita ser blanco cuando el overlay está abierto */
-    .btn-menu.abierto span { background: var(--texto); }
-
+ 
     section { padding: 2.5rem 0; }
     .hero { padding: 3rem 1.25rem; }
     .footer-inner { grid-template-columns: 1fr; }
@@ -992,66 +995,118 @@ section { padding: 4rem 0; }
     .card-info { padding: 0.75rem; }
     .carousel-btn { width: 30px; height: 30px; font-size: 1rem; }
 }
+ 
+/* En desktop, ocultar el botón hamburguesa */
+@media (min-width: 768px) {
+    .btn-menu { display: none; }
+}
 
-/* Overlay del menú mobile — vive en el body, fuera del header */
-.menu-overlay {
-    display: none;
+.menu-panel {
+    display: none; /* oculto por defecto en todos los tamaños */
     position: fixed;
-    inset: 0;
-    background: rgba(253, 252, 250, 0.98);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    z-index: 1000;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2.5rem;
-}
-
-.menu-overlay.abierto {
-    display: flex;
-}
-
-.menu-overlay a {
-    font-size: 1.6rem;
-    font-family: var(--fuente-titulo);
-    font-weight: 600;
-    color: var(--texto);
-    text-decoration: none;
-    transition: color 0.2s;
-}
-
-.menu-overlay a:hover {
-    color: var(--verde);
-}
-
-.menu-overlay-cerrar {
-    position: absolute;
-    top: 1.1rem;
+    /* Pegado debajo del header — el header mide ~57px en mobile */
+    top: 57px;
     right: 1.25rem;
-    width: 44px;
-    height: 44px;
+    width: 220px;
+    background: var(--blanco);
+    border: 1.5px solid var(--borde);
+    border-radius: 14px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.14);
+    z-index: 999;
+    overflow: hidden;
+    /* Animación de entrada */
+    transform-origin: top right;
+    transform: scale(0.92) translateY(-8px);
+    opacity: 0;
+    transition:
+        transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1),
+        opacity   0.18s ease;
+    padding: 0.5rem 0;
+}
+ 
+.menu-panel.abierto {
+    display: block;
+    transform: scale(1) translateY(0);
+    opacity: 1;
+}
+ 
+/* Truco: display:block no se puede animar con transition,
+   así que usamos un pequeño hack con animación keyframe */
+@keyframes panelEntrada {
+    from {
+        transform: scale(0.92) translateY(-8px);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+}
+ 
+.menu-panel.abierto {
+    animation: panelEntrada 0.22s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+ 
+/* Botón cerrar — esquina superior derecha del panel */
+.menu-panel-cerrar {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.75rem;
+    width: 28px;
+    height: 28px;
     border-radius: 50%;
-    border: 1.5px solid #e8e2db;
-    background: white;
-    font-size: 1.1rem;
+    border: 1px solid var(--borde);
+    background: var(--crema);
+    font-size: 0.75rem;
+    color: var(--texto-suave);
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #6b6b6b;
     font-family: inherit;
     line-height: 1;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+    z-index: 1;
 }
-
-.menu-overlay-cerrar:hover {
-    background: #fce8ec;
-    color: #d4687a;
-    border-color: #d4687a;
+ 
+.menu-panel-cerrar:hover {
+    background: var(--rosa-suave);
+    color: var(--rosa);
+    border-color: var(--rosa);
 }
-
-/* Solo mostrar el overlay en mobile */
+ 
+/* Links del panel */
+.menu-panel-link {
+    display: block;
+    padding: 0.75rem 1.25rem;
+    font-size: 1rem;
+    font-family: var(--fuente-titulo);
+    font-weight: 600;
+    color: var(--texto);
+    text-decoration: none;
+    transition: background 0.15s, color 0.15s;
+    /* Dejar espacio para la cruz en el primer item */
+    padding-right: 3rem;
+}
+ 
+.menu-panel nav a + a {
+    /* Separador sutil entre links */
+    border-top: 1px solid var(--borde);
+    /* Primer link no tiene separador arriba */
+}
+ 
+/* El primer link necesita un poco más de espacio arriba
+   para no quedar debajo de la cruz de cerrar */
+.menu-panel nav a:first-child {
+    padding-top: 0.9rem;
+}
+ 
+.menu-panel-link:hover {
+    background: var(--verde-suave);
+    color: var(--verde);
+}
+ 
+/* Solo mostrar el panel en mobile */
 @media (min-width: 768px) {
-    .menu-overlay { display: none !important; }
-    .btn-menu { display: none; }
+    .menu-panel { display: none !important; }
 }
