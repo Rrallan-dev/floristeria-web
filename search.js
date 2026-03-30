@@ -812,59 +812,69 @@ crearModalFiltros();
 aplicarFiltros();
 
 // ── Menú hamburguesa (mobile) ────────────────────────────────
+// ── Menú hamburguesa (mobile) ────────────────────────────────
 (function() {
     const btnMenu = document.getElementById('btn-menu');
-    const nav     = document.getElementById('site-nav');
-    if (!btnMenu || !nav) return;
+    if (!btnMenu) return;
 
-    // Agregar botón cerrar dentro del nav
+    // Leer los links del nav original para clonarlos en el overlay
+    const navOriginal = document.getElementById('site-nav');
+    if (!navOriginal) return;
+
+    // Crear el overlay fuera del header, directo en el body
+    const overlay = document.createElement('div');
+    overlay.className = 'menu-overlay';
+    overlay.id = 'menu-overlay';
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-modal', 'true');
+    overlay.setAttribute('aria-label', 'Menú de navegación');
+
+    // Botón cerrar
     const btnCerrar = document.createElement('button');
+    btnCerrar.className = 'menu-overlay-cerrar';
     btnCerrar.innerHTML = '✕';
     btnCerrar.setAttribute('aria-label', 'Cerrar menú');
-    btnCerrar.style.cssText = `
-        position: absolute;
-        top: 1.25rem;
-        right: 1.25rem;
-        width: 44px;
-        height: 44px;
-        border-radius: 50%;
-        border: 1.5px solid var(--borde);
-        background: white;
-        font-size: 1.1rem;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: var(--texto-suave);
-        font-family: inherit;
-    `;
-    nav.appendChild(btnCerrar);
+    overlay.appendChild(btnCerrar);
+
+    // Clonar los links del nav original
+    const links = navOriginal.querySelectorAll('a');
+    links.forEach(link => {
+        const a = document.createElement('a');
+        a.href = link.href;
+        a.textContent = link.textContent;
+        overlay.appendChild(a);
+    });
+
+    // Insertar el overlay al final del body
+    document.body.appendChild(overlay);
 
     function abrirMenu() {
-        nav.classList.add('abierto');
+        overlay.classList.add('abierto');
         btnMenu.classList.add('abierto');
         btnMenu.setAttribute('aria-expanded', 'true');
         document.body.style.overflow = 'hidden';
+        btnCerrar.focus();
     }
 
     function cerrarMenu() {
-        nav.classList.remove('abierto');
+        overlay.classList.remove('abierto');
         btnMenu.classList.remove('abierto');
         btnMenu.setAttribute('aria-expanded', 'false');
         document.body.style.overflow = '';
+        btnMenu.focus();
     }
 
     btnMenu.addEventListener('click', () => {
-        nav.classList.contains('abierto') ? cerrarMenu() : abrirMenu();
+        overlay.classList.contains('abierto') ? cerrarMenu() : abrirMenu();
     });
 
     btnCerrar.addEventListener('click', cerrarMenu);
 
-    nav.querySelectorAll('a').forEach(link => {
+    overlay.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', cerrarMenu);
     });
 
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') cerrarMenu();
+        if (e.key === 'Escape' && overlay.classList.contains('abierto')) cerrarMenu();
     });
 })();

@@ -940,45 +940,12 @@ section { padding: 4rem 0; }
     }
 }
 
-@media (min-width: 768px) {
-    .btn-menu { display: none; }
-}
-
 @media (max-width: 767px) {
 
-    /* El nav pasa a ser un panel desplegable */
+    /* El nav en mobile NO es el menú — es solo el contenedor lógico.
+       El menú real es el overlay que se crea via JS fuera del header. */
     .site-nav {
-        display: none;
-        position: fixed;
-        inset: 0;
-        background: rgba(253, 252, 250, 0.98);
-        backdrop-filter: blur(16px);
-        -webkit-backdrop-filter: blur(16px);
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 2.5rem;
-        z-index: 999;
-        overflow: hidden;
-        padding: 0;
-    }
-
-    .site-nav.abierto {
-        display: flex;
-    }
-
-    .site-nav a {
-        font-size: 1.6rem;
-        font-family: var(--fuente-titulo);
-        font-weight: 600;
-        color: var(--texto);
-        padding: 0;
-        border-bottom: none;
-        transition: color 0.2s;
-    }
-
-    .site-nav a:hover {
-        color: var(--verde);
+        display: none !important;
     }
 
     /* Botón hamburguesa */
@@ -995,6 +962,8 @@ section { padding: 4rem 0; }
         padding: 4px;
         border-radius: 6px;
         transition: background 0.2s;
+        position: relative;
+        z-index: 1001;
     }
 
     .btn-menu:hover { background: var(--crema); }
@@ -1005,26 +974,16 @@ section { padding: 4rem 0; }
         height: 2px;
         background: var(--texto);
         border-radius: 2px;
-        transition: transform 0.25s ease, opacity 0.25s ease;
+        transition: transform 0.28s ease, opacity 0.28s ease;
+        transform-origin: center;
     }
 
-    /* Animación a X cuando está abierto */
     .btn-menu.abierto span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    .btn-menu.abierto span:nth-child(2) { opacity: 0; }
+    .btn-menu.abierto span:nth-child(2) { opacity: 0; transform: scaleX(0); }
     .btn-menu.abierto span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
-    /* Botón cerrar dentro del nav (opcional, para accesibilidad) */
-    .nav-cerrar {
-        position: absolute;
-        top: 1rem;
-        right: 1.25rem;
-        font-size: 1.5rem;
-        background: none;
-        border: none;
-        cursor: pointer;
-        color: var(--texto-suave);
-        display: flex;
-    }
+    /* El btn-menu también necesita ser blanco cuando el overlay está abierto */
+    .btn-menu.abierto span { background: var(--texto); }
 
     section { padding: 2.5rem 0; }
     .hero { padding: 3rem 1.25rem; }
@@ -1032,4 +991,67 @@ section { padding: 4rem 0; }
     .grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
     .card-info { padding: 0.75rem; }
     .carousel-btn { width: 30px; height: 30px; font-size: 1rem; }
+}
+
+/* Overlay del menú mobile — vive en el body, fuera del header */
+.menu-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(253, 252, 250, 0.98);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    z-index: 1000;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+}
+
+.menu-overlay.abierto {
+    display: flex;
+}
+
+.menu-overlay a {
+    font-size: 1.6rem;
+    font-family: var(--fuente-titulo);
+    font-weight: 600;
+    color: var(--texto);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.menu-overlay a:hover {
+    color: var(--verde);
+}
+
+.menu-overlay-cerrar {
+    position: absolute;
+    top: 1.1rem;
+    right: 1.25rem;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1.5px solid #e8e2db;
+    background: white;
+    font-size: 1.1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6b6b6b;
+    font-family: inherit;
+    line-height: 1;
+}
+
+.menu-overlay-cerrar:hover {
+    background: #fce8ec;
+    color: #d4687a;
+    border-color: #d4687a;
+}
+
+/* Solo mostrar el overlay en mobile */
+@media (min-width: 768px) {
+    .menu-overlay { display: none !important; }
+    .btn-menu { display: none; }
 }
