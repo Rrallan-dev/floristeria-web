@@ -894,7 +894,7 @@ section { padding: 4rem 0; }
     pointer-events: none;
     white-space: nowrap;
     /* Animación: aparece, espera, desaparece */
-    animation: hintLifecycle 2.8s ease forwards;
+    animation: hintLifecycle 5s ease forwards;
     z-index: 5;
 }
 
@@ -912,8 +912,8 @@ section { padding: 4rem 0; }
 
 @keyframes hintLifecycle {
     0%   { opacity: 0; transform: translateY(6px); }
-    12%  { opacity: 1; transform: translateY(0); }
-    72%  { opacity: 1; transform: translateY(0); }
+    8%   { opacity: 1; transform: translateY(0); }
+    80%  { opacity: 1; transform: translateY(0); }
     100% { opacity: 0; transform: translateY(4px); }
 }
 
@@ -942,39 +942,94 @@ section { padding: 4rem 0; }
 
 @media (max-width: 767px) {
 
+    /* El nav pasa a ser un panel desplegable */
     .site-nav {
-        display: flex;
-        gap: 0;
-        overflow-x: auto;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(253, 252, 250, 0.97);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+        z-index: 200;
+        overflow: hidden;
     }
 
-    .site-nav::-webkit-scrollbar { display: none; }
+    .site-nav.abierto {
+        display: flex;
+    }
 
     .site-nav a {
-        white-space: nowrap;
-        padding: 0.25rem 0.75rem;
-        font-size: 0.8rem;
+        font-size: 1.4rem;
+        font-family: var(--fuente-titulo);
+        font-weight: 600;
+        color: var(--texto);
+        padding: 0;
+        border-bottom: none;
+    }
+
+    .site-nav a:hover {
+        color: var(--verde);
+    }
+
+    /* Botón hamburguesa */
+    .btn-menu {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 5px;
+        width: 36px;
+        height: 36px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 4px;
+        border-radius: 6px;
+        transition: background 0.2s;
+    }
+
+    .btn-menu:hover { background: var(--crema); }
+
+    .btn-menu span {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background: var(--texto);
+        border-radius: 2px;
+        transition: transform 0.25s ease, opacity 0.25s ease;
+    }
+
+    /* Animación a X cuando está abierto */
+    .btn-menu.abierto span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .btn-menu.abierto span:nth-child(2) { opacity: 0; }
+    .btn-menu.abierto span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Botón cerrar dentro del nav (opcional, para accesibilidad) */
+    .nav-cerrar {
+        position: absolute;
+        top: 1rem;
+        right: 1.25rem;
+        font-size: 1.5rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: var(--texto-suave);
+        display: flex;
     }
 
     section { padding: 2.5rem 0; }
-
     .hero { padding: 3rem 1.25rem; }
-
     .footer-inner { grid-template-columns: 1fr; }
-
-    .grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 0.75rem;
-    }
-
+    .grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
     .card-info { padding: 0.75rem; }
-
-    /* En mobile, las flechas del carrusel son más pequeñas */
-    .carousel-btn {
-        width: 30px;
-        height: 30px;
-        font-size: 1rem;
-    }
+    .carousel-btn { width: 30px; height: 30px; font-size: 1rem; }
 }
+
+/* El botón hamburguesa solo existe en mobile */
+.btn-menu { display: none; }
