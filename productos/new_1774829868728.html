@@ -441,14 +441,12 @@
             next.addEventListener('click', () => goTo(current + 1));
             thumbs.forEach((t, i) => t.addEventListener('click', () => goTo(i)));
 
-            // Abrir lightbox al hacer click en la imagen activa
             track.addEventListener('click', (e) => {
                 if (e.target.classList.contains('lightbox-trigger')) {
                     window.abrirLightbox(srcs, current);
                 }
             });
 
-            // Abrir lightbox desde el botón expandir
             if (expandBtn) {
                 expandBtn.addEventListener('click', () => {
                     window.abrirLightbox(srcs, current);
