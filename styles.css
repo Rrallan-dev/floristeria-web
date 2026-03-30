@@ -730,6 +730,55 @@ section { padding: 4rem 0; }
     html  { scroll-behavior: auto; }
 }
 
+/* ════════════════════════════════════════════════════════════
+   SCROLL HORIZONTAL — Secciones Ofertas y Novedades
+   ════════════════════════════════════════════════════════════
+   .scroll-horizontal-wrap  → oculta el overflow lateral
+   .scroll-horizontal       → fila con scroll nativo en touch
+   
+   El "peek" (tarjeta cortada al final) indica visualmente
+   que hay más contenido sin necesitar ningún texto extra.
+   ════════════════════════════════════════════════════════════ */
+.scroll-horizontal-wrap {
+    /* Romper el contenedor para que llegue al borde de la pantalla */
+    margin-left: -1.25rem;
+    margin-right: -1.25rem;
+    overflow: hidden;
+}
+
+.scroll-horizontal {
+    display: flex;
+    flex-direction: row;
+    gap: var(--gap);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    /* Padding para que la primera tarjeta no quede pegada al borde
+       y para que el peek de la última sea visible */
+    padding: 0.5rem 1.25rem 1rem;
+}
+
+.scroll-horizontal::-webkit-scrollbar {
+    display: none;
+}
+
+.scroll-horizontal .card {
+    /* Ancho fijo para que quepan ~1.8 tarjetas en mobile */
+    flex: 0 0 200px;
+    scroll-snap-align: start;
+    /* Cancelar la animación de entrada en scroll horizontal
+       para evitar que las tarjetas fuera del viewport "salten" */
+    animation: none;
+}
+
+/* En desktop, las tarjetas pueden ser un poco más anchas */
+@media (min-width: 768px) {
+    .scroll-horizontal .card {
+        flex: 0 0 240px;
+    }
+}
 
 /* ════════════════════════════════════════════════════════════
    13. RESPONSIVE — Mobile first
