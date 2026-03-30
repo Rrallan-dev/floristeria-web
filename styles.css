@@ -940,6 +940,10 @@ section { padding: 4rem 0; }
     }
 }
 
+@media (min-width: 768px) {
+    .btn-menu { display: none; }
+}
+
 @media (max-width: 767px) {
 
     /* El nav pasa a ser un panel desplegable */
@@ -1030,6 +1034,3 @@ section { padding: 4rem 0; }
     .card-info { padding: 0.75rem; }
     .carousel-btn { width: 30px; height: 30px; font-size: 1rem; }
 }
-
-/* El botón hamburguesa solo existe en mobile */
-.btn-menu { display: none; }
