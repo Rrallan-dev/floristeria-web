@@ -1,72 +1,28 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <!-- ============================================================
-         META BÁSICO
-         ============================================================ -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- ============================================================
-         SEO — Título y descripción
-         ============================================================
-         El título aparece en la pestaña del browser y en Google.
-         La descripción aparece como subtítulo en los resultados de búsqueda.
-         ============================================================ -->
     <title>El Bunker de las Flores — Floristería en Misiones</title>
     <meta name="description" content="Flores frescas, ramos y arreglos florales. Ofertas y novedades actualizadas. El Bunker de las Flores, Misiones.">
 
-    <!-- ============================================================
-         OPEN GRAPH — Preview al compartir en WhatsApp / redes
-         ============================================================
-         Cuando alguien comparte la URL en WhatsApp, estas etiquetas
-         controlan la imagen y el texto que aparecen en la preview.
-         og:type "website" es el valor estándar para sitios de comercio.
-         ============================================================ -->
     <meta property="og:type"        content="website">
     <meta property="og:title"       content="El Bunker de las Flores">
     <meta property="og:description" content="Flores frescas, ramos y arreglos florales en Misiones.">
-    <!-- TODO: reemplazar con una imagen real de la tienda (1200x630px recomendado) -->
-    <meta property="og:image" content="https://elbunkerdelasflores.com.ar/img/og-cover.jpg">
+    <meta property="og:image"       content="https://elbunkerdelasflores.com.ar/img/og-cover.jpg">
 
-    <!-- ============================================================
-         ESTILOS
-         ============================================================
-         Se carga antes del contenido para evitar el FOUC
-         (Flash of Unstyled Content — destello de contenido sin formato).
-         ============================================================ -->
     <link rel="stylesheet" href="styles.css">
-
-    <!-- ============================================================
-         BUSCADOR (search.js) — Carga diferida
-         ============================================================
-         defer: el script se descarga en paralelo con el HTML pero
-         se ejecuta DESPUÉS de que todo el HTML fue parseado.
-         Ideal para scripts que no son críticos para el primer render.
-         Si search.js no existe aún, este tag simplemente no hace nada.
-         ============================================================ -->
     <script src="search.js" defer></script>
 </head>
 
 <body>
 
-    <!-- ============================================================
-         HEADER STICKY
-         ============================================================
-         Se queda visible en la parte superior al hacer scroll.
-         Tiene efecto de vidrio esmerilado (blur) definido en el CSS.
-         ============================================================ -->
     <header class="site-header">
         <div class="header-inner">
-
-            <!-- Logo — nombre de la tienda dividido para colorear "Bunker" -->
             <a href="index.html" class="logo">
                 El <span>Bunker</span> de las Flores
             </a>
-
-            <!-- Navegación rápida a secciones de la portada.
-                 Solo visible en desktop (el CSS la oculta en mobile).
-                 Los href="#id" hacen scroll suave a esa sección. -->
             <nav aria-label="Secciones">
                 <ul class="site-nav">
                     <li><a href="#ofertas">Ofertas</a></li>
@@ -75,14 +31,10 @@
                     <li><a href="#contacto">Contacto</a></li>
                 </ul>
             </nav>
-
         </div>
     </header>
 
 
-    <!-- ============================================================
-         HERO — Bienvenida
-         ============================================================ -->
     <section class="hero" aria-label="Bienvenida">
         <div class="hero-inner">
             <span class="hero-badge">🌿 Flores frescas en Misiones</span>
@@ -97,12 +49,67 @@
         <!-- ============================================================
              SECCIÓN OFERTAS
              ============================================================
-             Solo aparece si hay productos con esOferta: true.
-             Si no hay ninguno, build.js inyecta un mensaje vacío
-             gracias al bloque de fallback que tiene definido.
-
-             {{OFERTAS}} es el marcador que build.js reemplaza con
-             el HTML generado de las tarjetas de producto.
+             
+        <div class="scroll-horizontal-wrap">
+            <div class="scroll-horizontal">
+                
+    <div class="card" data-nombre="Ejemplo 1" data-tags="regalo">
+        <a href="productos/new_1774829819283.html" class="card-img-wrap">
+            <img src="img/1774829819084_xmkzq.jpg" alt="Ejemplo 1" loading="lazy">
+            <div class="card-badges"><span class="card-badge oferta">Oferta</span><span class="card-badge nuevo">Nuevo</span></div>
+            <span class="card-multi-img" aria-label="2 fotos">📷 2</span>
+        </a>
+        <div class="card-info">
+            <h3>Ejemplo 1</h3>
+            <div class="precio consultar">Consultar precio</div>
+            
+            <a class="btn-ver" href="productos/new_1774829819283.html">Ver más</a>
+        </div>
+    </div>
+    <div class="card" data-nombre="Ejemplo 2" data-tags="ramo">
+        <a href="productos/new_1774829845816.html" class="card-img-wrap">
+            <img src="img/1774829845381_k97gd.jpg" alt="Ejemplo 2" loading="lazy">
+            <div class="card-badges"><span class="card-badge oferta">Oferta</span><span class="card-badge nuevo">Nuevo</span></div>
+            <span class="card-multi-img" aria-label="2 fotos">📷 2</span>
+        </a>
+        <div class="card-info">
+            <h3>Ejemplo 2</h3>
+            <div class="precio consultar">Consultar precio</div>
+            
+            <a class="btn-ver" href="productos/new_1774829845816.html">Ver más</a>
+        </div>
+    </div>
+    <div class="card" data-nombre="Ejemplo 3" data-tags="planta de exterior">
+        <a href="productos/new_1774829868728.html" class="card-img-wrap">
+            <img src="img/1774829868342_1p6m9.jpg" alt="Ejemplo 3" loading="lazy">
+            <div class="card-badges"><span class="card-badge oferta">Oferta</span><span class="card-badge nuevo">Nuevo</span></div>
+            <span class="card-multi-img" aria-label="2 fotos">📷 2</span>
+        </a>
+        <div class="card-info">
+            <h3>Ejemplo 3</h3>
+            <div class="precio consultar">Consultar precio</div>
+            
+            <a class="btn-ver" href="productos/new_1774829868728.html">Ver más</a>
+        </div>
+    </div>
+    <div class="card" data-nombre="ejemplo 4" data-tags="">
+        <a href="productos/new_1774829884720.html" class="card-img-wrap">
+            <img src="img/1774829884388_38kvx.jpg" alt="ejemplo 4" loading="lazy">
+            <div class="card-badges"><span class="card-badge oferta">Oferta</span><span class="card-badge nuevo">Nuevo</span></div>
+            
+        </a>
+        <div class="card-info">
+            <h3>ejemplo 4</h3>
+            <div class="precio consultar">Consultar precio</div>
+            
+            <a class="btn-ver" href="productos/new_1774829884720.html">Ver más</a>
+        </div>
+    </div>
+            </div>
+        </div> es reemplazado por build.js con el
+             bloque completo: scroll horizontal si hay productos,
+             o mensaje vacío si no hay ninguno.
+             NO hay <div class="grid"> acá — build.js lo genera.
              ============================================================ -->
         <section id="ofertas" aria-labelledby="titulo-ofertas">
             <div class="contenedor">
@@ -112,9 +119,64 @@
                     <h2 id="titulo-ofertas">Precios especiales</h2>
                 </div>
 
-                <div class="grid">
-                    {{OFERTAS}}
-                </div>
+                
+        <div class="scroll-horizontal-wrap">
+            <div class="scroll-horizontal">
+                
+    <div class="card" data-nombre="Ejemplo 1" data-tags="regalo">
+        <a href="productos/new_1774829819283.html" class="card-img-wrap">
+            <img src="img/1774829819084_xmkzq.jpg" alt="Ejemplo 1" loading="lazy">
+            <div class="card-badges"><span class="card-badge oferta">Oferta</span><span class="card-badge nuevo">Nuevo</span></div>
+            <span class="card-multi-img" aria-label="2 fotos">📷 2</span>
+        </a>
+        <div class="card-info">
+            <h3>Ejemplo 1</h3>
+            <div class="precio consultar">Consultar precio</div>
+            
+            <a class="btn-ver" href="productos/new_1774829819283.html">Ver más</a>
+        </div>
+    </div>
+    <div class="card" data-nombre="Ejemplo 2" data-tags="ramo">
+        <a href="productos/new_1774829845816.html" class="card-img-wrap">
+            <img src="img/1774829845381_k97gd.jpg" alt="Ejemplo 2" loading="lazy">
+            <div class="card-badges"><span class="card-badge oferta">Oferta</span><span class="card-badge nuevo">Nuevo</span></div>
+            <span class="card-multi-img" aria-label="2 fotos">📷 2</span>
+        </a>
+        <div class="card-info">
+            <h3>Ejemplo 2</h3>
+            <div class="precio consultar">Consultar precio</div>
+            
+            <a class="btn-ver" href="productos/new_1774829845816.html">Ver más</a>
+        </div>
+    </div>
+    <div class="card" data-nombre="Ejemplo 3" data-tags="planta de exterior">
+        <a href="productos/new_1774829868728.html" class="card-img-wrap">
+            <img src="img/1774829868342_1p6m9.jpg" alt="Ejemplo 3" loading="lazy">
+            <div class="card-badges"><span class="card-badge oferta">Oferta</span><span class="card-badge nuevo">Nuevo</span></div>
+            <span class="card-multi-img" aria-label="2 fotos">📷 2</span>
+        </a>
+        <div class="card-info">
+            <h3>Ejemplo 3</h3>
+            <div class="precio consultar">Consultar precio</div>
+            
+            <a class="btn-ver" href="productos/new_1774829868728.html">Ver más</a>
+        </div>
+    </div>
+    <div class="card" data-nombre="ejemplo 4" data-tags="">
+        <a href="productos/new_1774829884720.html" class="card-img-wrap">
+            <img src="img/1774829884388_38kvx.jpg" alt="ejemplo 4" loading="lazy">
+            <div class="card-badges"><span class="card-badge oferta">Oferta</span><span class="card-badge nuevo">Nuevo</span></div>
+            
+        </a>
+        <div class="card-info">
+            <h3>ejemplo 4</h3>
+            <div class="precio consultar">Consultar precio</div>
+            
+            <a class="btn-ver" href="productos/new_1774829884720.html">Ver más</a>
+        </div>
+    </div>
+            </div>
+        </div>
 
             </div>
         </section>
@@ -122,8 +184,6 @@
 
         <!-- ============================================================
              SECCIÓN NOVEDADES
-             ============================================================
-             Productos con esNuevo: true.
              ============================================================ -->
         <section id="novedades" aria-labelledby="titulo-novedades">
             <div class="contenedor">
@@ -133,9 +193,64 @@
                     <h2 id="titulo-novedades">Recién llegados</h2>
                 </div>
 
-                <div class="grid">
-                    {{NOVEDADES}}
-                </div>
+                
+        <div class="scroll-horizontal-wrap">
+            <div class="scroll-horizontal">
+                
+    <div class="card" data-nombre="Ejemplo 1" data-tags="regalo">
+        <a href="productos/new_1774829819283.html" class="card-img-wrap">
+            <img src="img/1774829819084_xmkzq.jpg" alt="Ejemplo 1" loading="lazy">
+            <div class="card-badges"><span class="card-badge oferta">Oferta</span><span class="card-badge nuevo">Nuevo</span></div>
+            <span class="card-multi-img" aria-label="2 fotos">📷 2</span>
+        </a>
+        <div class="card-info">
+            <h3>Ejemplo 1</h3>
+            <div class="precio consultar">Consultar precio</div>
+            
+            <a class="btn-ver" href="productos/new_1774829819283.html">Ver más</a>
+        </div>
+    </div>
+    <div class="card" data-nombre="Ejemplo 2" data-tags="ramo">
+        <a href="productos/new_1774829845816.html" class="card-img-wrap">
+            <img src="img/1774829845381_k97gd.jpg" alt="Ejemplo 2" loading="lazy">
+            <div class="card-badges"><span class="card-badge oferta">Oferta</span><span class="card-badge nuevo">Nuevo</span></div>
+            <span class="card-multi-img" aria-label="2 fotos">📷 2</span>
+        </a>
+        <div class="card-info">
+            <h3>Ejemplo 2</h3>
+            <div class="precio consultar">Consultar precio</div>
+            
+            <a class="btn-ver" href="productos/new_1774829845816.html">Ver más</a>
+        </div>
+    </div>
+    <div class="card" data-nombre="Ejemplo 3" data-tags="planta de exterior">
+        <a href="productos/new_1774829868728.html" class="card-img-wrap">
+            <img src="img/1774829868342_1p6m9.jpg" alt="Ejemplo 3" loading="lazy">
+            <div class="card-badges"><span class="card-badge oferta">Oferta</span><span class="card-badge nuevo">Nuevo</span></div>
+            <span class="card-multi-img" aria-label="2 fotos">📷 2</span>
+        </a>
+        <div class="card-info">
+            <h3>Ejemplo 3</h3>
+            <div class="precio consultar">Consultar precio</div>
+            
+            <a class="btn-ver" href="productos/new_1774829868728.html">Ver más</a>
+        </div>
+    </div>
+    <div class="card" data-nombre="ejemplo 4" data-tags="">
+        <a href="productos/new_1774829884720.html" class="card-img-wrap">
+            <img src="img/1774829884388_38kvx.jpg" alt="ejemplo 4" loading="lazy">
+            <div class="card-badges"><span class="card-badge oferta">Oferta</span><span class="card-badge nuevo">Nuevo</span></div>
+            
+        </a>
+        <div class="card-info">
+            <h3>ejemplo 4</h3>
+            <div class="precio consultar">Consultar precio</div>
+            
+            <a class="btn-ver" href="productos/new_1774829884720.html">Ver más</a>
+        </div>
+    </div>
+            </div>
+        </div>
 
             </div>
         </section>
@@ -144,7 +259,60 @@
         <!-- ============================================================
              SECCIÓN CATÁLOGO COMPLETO
              ============================================================
-             Todos los productos, sin filtro.
+             El catálogo sigue usando la grilla normal.
+             
+    <div class="card" data-nombre="Ejemplo 1" data-tags="regalo">
+        <a href="productos/new_1774829819283.html" class="card-img-wrap">
+            <img src="img/1774829819084_xmkzq.jpg" alt="Ejemplo 1" loading="lazy">
+            <div class="card-badges"><span class="card-badge oferta">Oferta</span><span class="card-badge nuevo">Nuevo</span></div>
+            <span class="card-multi-img" aria-label="2 fotos">📷 2</span>
+        </a>
+        <div class="card-info">
+            <h3>Ejemplo 1</h3>
+            <div class="precio consultar">Consultar precio</div>
+            
+            <a class="btn-ver" href="productos/new_1774829819283.html">Ver más</a>
+        </div>
+    </div>
+    <div class="card" data-nombre="Ejemplo 2" data-tags="ramo">
+        <a href="productos/new_1774829845816.html" class="card-img-wrap">
+            <img src="img/1774829845381_k97gd.jpg" alt="Ejemplo 2" loading="lazy">
+            <div class="card-badges"><span class="card-badge oferta">Oferta</span><span class="card-badge nuevo">Nuevo</span></div>
+            <span class="card-multi-img" aria-label="2 fotos">📷 2</span>
+        </a>
+        <div class="card-info">
+            <h3>Ejemplo 2</h3>
+            <div class="precio consultar">Consultar precio</div>
+            
+            <a class="btn-ver" href="productos/new_1774829845816.html">Ver más</a>
+        </div>
+    </div>
+    <div class="card" data-nombre="Ejemplo 3" data-tags="planta de exterior">
+        <a href="productos/new_1774829868728.html" class="card-img-wrap">
+            <img src="img/1774829868342_1p6m9.jpg" alt="Ejemplo 3" loading="lazy">
+            <div class="card-badges"><span class="card-badge oferta">Oferta</span><span class="card-badge nuevo">Nuevo</span></div>
+            <span class="card-multi-img" aria-label="2 fotos">📷 2</span>
+        </a>
+        <div class="card-info">
+            <h3>Ejemplo 3</h3>
+            <div class="precio consultar">Consultar precio</div>
+            
+            <a class="btn-ver" href="productos/new_1774829868728.html">Ver más</a>
+        </div>
+    </div>
+    <div class="card" data-nombre="ejemplo 4" data-tags="">
+        <a href="productos/new_1774829884720.html" class="card-img-wrap">
+            <img src="img/1774829884388_38kvx.jpg" alt="ejemplo 4" loading="lazy">
+            <div class="card-badges"><span class="card-badge oferta">Oferta</span><span class="card-badge nuevo">Nuevo</span></div>
+            
+        </a>
+        <div class="card-info">
+            <h3>ejemplo 4</h3>
+            <div class="precio consultar">Consultar precio</div>
+            
+            <a class="btn-ver" href="productos/new_1774829884720.html">Ver más</a>
+        </div>
+    </div> se inyecta dentro del <div class="grid">.
              ============================================================ -->
         <section id="catalogo" aria-labelledby="titulo-catalogo">
             <div class="contenedor">
@@ -153,11 +321,6 @@
                     <h2 id="titulo-catalogo">Catálogo completo</h2>
                 </div>
 
-                <!-- ── Buscador ──
-                     Solo aparece si search.js está presente y se cargó.
-                     search.js busca este input por ID y escucha el evento
-                     "input" para filtrar las tarjetas en tiempo real.
-                     Si search.js no existe, el input se ve pero no hace nada. -->
                 <div class="buscador-wrap">
                     <input
                         type="search"
@@ -229,12 +392,6 @@
     </main>
 
 
-    <!-- ============================================================
-         FOOTER
-         ============================================================
-         Información de contacto y datos de la tienda.
-         TODO: reemplazar el número de WhatsApp con el real.
-         ============================================================ -->
     <footer class="site-footer" id="contacto">
         <div class="footer-inner">
 
@@ -244,7 +401,6 @@
                     Flores frescas y arreglos para cada ocasión.<br>
                     Misiones, Argentina.
                 </p>
-                <!-- Redes sociales -->
                 <div class="footer-redes">
                     <a href="https://www.instagram.com/el_bunker_de_las_flores/"
                     target="_blank"
@@ -286,7 +442,6 @@
                 </a>
             </div>
 
-            <!-- Google Maps -->
             <div class="footer-mapa">
                 <h4>¿Dónde estamos?</h4>
                 <div class="mapa-wrap">
@@ -310,7 +465,6 @@
         </p>
     </footer>
 
-    <!-- Año dinámico en el copyright — evita tener que actualizar el HTML cada año -->
     <script>
         document.getElementById('anio-actual').textContent = new Date().getFullYear();
     </script>
