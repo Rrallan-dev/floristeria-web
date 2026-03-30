@@ -817,6 +817,29 @@ aplicarFiltros();
     const nav     = document.getElementById('site-nav');
     if (!btnMenu || !nav) return;
 
+    // Agregar botón cerrar dentro del nav
+    const btnCerrar = document.createElement('button');
+    btnCerrar.innerHTML = '✕';
+    btnCerrar.setAttribute('aria-label', 'Cerrar menú');
+    btnCerrar.style.cssText = `
+        position: absolute;
+        top: 1.25rem;
+        right: 1.25rem;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        border: 1.5px solid var(--borde);
+        background: white;
+        font-size: 1.1rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--texto-suave);
+        font-family: inherit;
+    `;
+    nav.appendChild(btnCerrar);
+
     function abrirMenu() {
         nav.classList.add('abierto');
         btnMenu.classList.add('abierto');
@@ -835,12 +858,12 @@ aplicarFiltros();
         nav.classList.contains('abierto') ? cerrarMenu() : abrirMenu();
     });
 
-    // Al hacer click en cualquier link del nav, cerrar el menú
+    btnCerrar.addEventListener('click', cerrarMenu);
+
     nav.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', cerrarMenu);
     });
 
-    // Escape cierra el menú
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') cerrarMenu();
     });
