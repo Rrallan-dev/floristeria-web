@@ -385,6 +385,15 @@
                     </svg>
                 </button>
             </div>
+            <script>
+            (function() {
+                const srcs = ['../img/1774963753107_nemgl.jpg'];
+                const img     = document.querySelector('.lightbox-trigger');
+                const expand  = document.querySelector('.lightbox-expand-btn');
+                if (img)    img.addEventListener('click',    () => window.abrirLightbox(srcs, 0));
+                if (expand) expand.addEventListener('click', () => window.abrirLightbox(srcs, 0));
+            })();
+            </script>
                 </div>
 
                 <div class="producto-info">

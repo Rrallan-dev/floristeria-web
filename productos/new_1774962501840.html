@@ -385,6 +385,15 @@
                     </svg>
                 </button>
             </div>
+            <script>
+            (function() {
+                const srcs = ['../img/1774962501529_oeltb.jpg'];
+                const img     = document.querySelector('.lightbox-trigger');
+                const expand  = document.querySelector('.lightbox-expand-btn');
+                if (img)    img.addEventListener('click',    () => window.abrirLightbox(srcs, 0));
+                if (expand) expand.addEventListener('click', () => window.abrirLightbox(srcs, 0));
+            })();
+            </script>
                 </div>
 
                 <div class="producto-info">
