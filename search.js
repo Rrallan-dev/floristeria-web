@@ -33,11 +33,24 @@
 // Si en el futuro se migra a módulos, reemplazar este bloque
 // con: import { TAGS_DISPONIBLES } from './tags.js';
 const TAGS_DISPONIBLES = [
-    { value: 'romántico',          label: 'Romántico',          emoji: '' },
-    { value: 'regalo',             label: 'Regalo',             emoji: '' },
-    { value: 'ramo',               label: 'Ramo',               emoji: '' },
-    { value: 'planta de interior', label: 'Planta de interior', emoji: '' },
-    { value: 'planta de exterior', label: 'Planta de exterior', emoji: '' },
+    { value: 'ramos',            label: 'ramos',            emoji: '' },
+    { value: 'arreglos florales', label: 'Arreglos florales', emoji: '' },
+    { value: 'ofrenda fúnebre',label: 'Ofrenda fúnebre',emoji: '' },
+    { value: 'maceta',label: 'Maceta',emoji: '' },
+    { value: 'sustrato',            label: 'Sustrato',            emoji: '' },
+    { value: 'piedra',              label: 'Piedra',              emoji: '' },
+    { value: 'plantas de interior',label: 'Plantas de interior',emoji: '' },
+    { value: 'plantas de exterior',label: 'Plantas de exterior',emoji: '' },
+    { value: 'fertilizante',            label: 'Fertilizante',            emoji: '' },
+    { value: 'jardinería',              label: 'Jardinería',              emoji: '' },
+    { value: 'florero',label: 'Florero',emoji: '' },
+    { value: 'deco hogar',label: 'Deco hogar',emoji: '' },
+    { value: 'adorno de jardín',label: 'Adorno de jardín',emoji: '' },
+    { value: 'regalería',label: 'Regalería',emoji: '' },
+    { value: 'pie nórdico',label: 'Pie nórdico',emoji: '' },
+    { value: 'flor artificial',label: 'Flor artificial',emoji: '' },
+    { value: 'alfombras',label: 'Alfombras',emoji: '' },
+    { value: 'fragancias de ambiente',label: 'Fragancias de ambiente',emoji: '' },
 ];
 
 
