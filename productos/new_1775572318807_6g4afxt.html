@@ -378,7 +378,7 @@
                         class="lightbox-trigger"
                         data-lightbox-src="../img/1775572317579_pw4v7.jpg"
                         data-lightbox-index="0"
-                        data-lightbox-total="2"
+                        data-lightbox-total="3"
                         style="cursor:zoom-in">
         </div>
     
@@ -389,7 +389,18 @@
                         class="lightbox-trigger"
                         data-lightbox-src="../img/1775572318271_n7yzy.jpg"
                         data-lightbox-index="1"
-                        data-lightbox-total="2"
+                        data-lightbox-total="3"
+                        style="cursor:zoom-in">
+        </div>
+    
+        <div class="carousel-slide" data-index="2">
+            <img src="../img/1777123970646_zg80f.jpg"
+                        alt="Humidificador — foto 3"
+                        loading="lazy"
+                        class="lightbox-trigger"
+                        data-lightbox-src="../img/1777123970646_zg80f.jpg"
+                        data-lightbox-index="2"
+                        data-lightbox-total="3"
                         style="cursor:zoom-in">
         </div>
     
@@ -423,6 +434,14 @@
             <img src="../img/1775572318271_n7yzy.jpg" alt="Miniatura 2" loading="lazy">
         </button>
     
+        <button
+            class="carousel-thumb"
+            data-index="2"
+            aria-label="Ver foto 3"
+        >
+            <img src="../img/1777123970646_zg80f.jpg" alt="Miniatura 3" loading="lazy">
+        </button>
+    
             </div>
         </div>
         <script>
@@ -433,7 +452,7 @@
             const prev    = document.querySelector('.carousel-prev');
             const next    = document.querySelector('.carousel-next');
             const expandBtn = document.querySelector('.carousel-expand-btn');
-            const srcs    = ['../img/1775572317579_pw4v7.jpg','../img/1775572318271_n7yzy.jpg'];
+            const srcs    = ['../img/1775572317579_pw4v7.jpg','../img/1775572318271_n7yzy.jpg','../img/1777123970646_zg80f.jpg'];
             let current   = 0;
 
             function goTo(index) {

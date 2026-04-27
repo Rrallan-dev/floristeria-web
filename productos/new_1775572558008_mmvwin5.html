@@ -368,32 +368,107 @@
 
                 <div class="producto-img-wrap">
                     
-            <div class="lightbox-trigger-wrap">
-                <img src="../img/1775572553460_xrgtg.jpg" alt="Humidificador"
-                     class="producto-img-principal lightbox-trigger"
-                     data-lightbox-src="../img/1775572553460_xrgtg.jpg"
-                     data-lightbox-index="0"
-                     data-lightbox-total="1"
-                     style="cursor:zoom-in">
-                <button class="lightbox-expand-btn" aria-label="Ver imagen completa">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="2.5">
-                        <polyline points="15 3 21 3 21 9"/>
-                        <polyline points="9 21 3 21 3 15"/>
-                        <line x1="21" y1="3" x2="14" y2="10"/>
-                        <line x1="3" y1="21" x2="10" y2="14"/>
-                    </svg>
-                </button>
+        <div class="carousel" role="region" aria-label="Fotos del producto">
+            <div class="carousel-track">
+                
+        <div class="carousel-slide active" data-index="0">
+            <img src="../img/1775572553460_xrgtg.jpg"
+                        alt="Humidificador — foto 1"
+                        loading="eager"
+                        class="lightbox-trigger"
+                        data-lightbox-src="../img/1775572553460_xrgtg.jpg"
+                        data-lightbox-index="0"
+                        data-lightbox-total="2"
+                        style="cursor:zoom-in">
+        </div>
+    
+        <div class="carousel-slide" data-index="1">
+            <img src="../img/1777124039913_q2jmq.jpg"
+                        alt="Humidificador — foto 2"
+                        loading="lazy"
+                        class="lightbox-trigger"
+                        data-lightbox-src="../img/1777124039913_q2jmq.jpg"
+                        data-lightbox-index="1"
+                        data-lightbox-total="2"
+                        style="cursor:zoom-in">
+        </div>
+    
             </div>
-            <script>
-            (function() {
-                const srcs = ['../img/1775572553460_xrgtg.jpg'];
-                const img     = document.querySelector('.lightbox-trigger');
-                const expand  = document.querySelector('.lightbox-expand-btn');
-                if (img)    img.addEventListener('click',    () => window.abrirLightbox(srcs, 0));
-                if (expand) expand.addEventListener('click', () => window.abrirLightbox(srcs, 0));
-            })();
-            </script>
+            <button class="carousel-btn carousel-prev" aria-label="Foto anterior">‹</button>
+            <button class="carousel-btn carousel-next" aria-label="Foto siguiente">›</button>
+            <button class="lightbox-expand-btn carousel-expand-btn" aria-label="Ver imagen completa">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2.5">
+                    <polyline points="15 3 21 3 21 9"/>
+                    <polyline points="9 21 3 21 3 15"/>
+                    <line x1="21" y1="3" x2="14" y2="10"/>
+                    <line x1="3" y1="21" x2="10" y2="14"/>
+                </svg>
+            </button>
+            <div class="carousel-thumbs">
+                
+        <button
+            class="carousel-thumb active"
+            data-index="0"
+            aria-label="Ver foto 1"
+        >
+            <img src="../img/1775572553460_xrgtg.jpg" alt="Miniatura 1" loading="lazy">
+        </button>
+    
+        <button
+            class="carousel-thumb"
+            data-index="1"
+            aria-label="Ver foto 2"
+        >
+            <img src="../img/1777124039913_q2jmq.jpg" alt="Miniatura 2" loading="lazy">
+        </button>
+    
+            </div>
+        </div>
+        <script>
+        (function() {
+            const track   = document.querySelector('.carousel-track');
+            const slides  = document.querySelectorAll('.carousel-slide');
+            const thumbs  = document.querySelectorAll('.carousel-thumb');
+            const prev    = document.querySelector('.carousel-prev');
+            const next    = document.querySelector('.carousel-next');
+            const expandBtn = document.querySelector('.carousel-expand-btn');
+            const srcs    = ['../img/1775572553460_xrgtg.jpg','../img/1777124039913_q2jmq.jpg'];
+            let current   = 0;
+
+            function goTo(index) {
+                slides[current].classList.remove('active');
+                thumbs[current].classList.remove('active');
+                current = (index + slides.length) % slides.length;
+                slides[current].classList.add('active');
+                thumbs[current].classList.add('active');
+            }
+
+            prev.addEventListener('click', () => goTo(current - 1));
+            next.addEventListener('click', () => goTo(current + 1));
+            thumbs.forEach((t, i) => t.addEventListener('click', () => goTo(i)));
+
+            track.addEventListener('click', (e) => {
+                if (e.target.classList.contains('lightbox-trigger')) {
+                    window.abrirLightbox(srcs, current);
+                }
+            });
+
+            if (expandBtn) {
+                expandBtn.addEventListener('click', () => {
+                    window.abrirLightbox(srcs, current);
+                });
+            }
+
+            let startX = 0;
+            track.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+            track.addEventListener('touchend', e => {
+                const diff = startX - e.changedTouches[0].clientX;
+                if (Math.abs(diff) > 40) goTo(diff > 0 ? current + 1 : current - 1);
+            }, { passive: true });
+        })();
+        </script>
+    
                 </div>
 
                 <div class="producto-info">
